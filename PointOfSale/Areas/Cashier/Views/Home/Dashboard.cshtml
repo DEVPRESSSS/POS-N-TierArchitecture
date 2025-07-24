@@ -1,0 +1,248 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+
+<div class="container-fluid py-4">
+    <!-- Dashboard Header -->
+    <div class="dashboard-header">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h2 class="dashboard-title mb-1">Dashboard Overview</h2>
+                <p class="text-muted mb-0">Welcome back! Here's what's happening today.</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <div class="time-display" id="currentDate"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Cards Row 1 -->
+    <div class="row mb-4">
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 mb-3">
+            <div class="card stats-card-primary h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="stats-label mb-2">Today's Sales</p>
+                            <h3 class="stats-number">₱12,450</h3>
+                            <small><i class="bi bi-arrow-up"></i> +12% from yesterday</small>
+                        </div>
+                        <div>
+                            <i class="bi bi-cash-coin stats-icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 mb-3">
+            <div class="card stats-card-success h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="stats-label mb-2">Transactions</p>
+                            <h3 class="stats-number">148</h3>
+                            <small><i class="bi bi-arrow-up"></i> +8% from yesterday</small>
+                        </div>
+                        <div>
+                            <i class="bi bi-receipt stats-icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 mb-3">
+            <div class="card stats-card-warning h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="stats-label mb-2">Items Sold</p>
+                            <h3 class="stats-number">342</h3>
+                            <small><i class="bi bi-arrow-up"></i> +15% from yesterday</small>
+                        </div>
+                        <div>
+                            <i class="bi bi-box-seam stats-icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 mb-3">
+            <div class="card stats-card-info h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="stats-label mb-2">Average Sale</p>
+                            <h3 class="stats-number">₱84</h3>
+                            <small><i class="bi bi-arrow-down"></i> -3% from yesterday</small>
+                        </div>
+                        <div>
+                            <i class="bi bi-graph-up stats-icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 mb-3">
+            <div class="card stats-card-dark h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="stats-label mb-2">Total Customers</p>
+                            <h3 class="stats-number">126</h3>
+                            <small><i class="bi bi-arrow-up"></i> +5% from yesterday</small>
+                        </div>
+                        <div>
+                            <i class="bi bi-people stats-icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 mb-3">
+            <div class="card stats-card-orange h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="stats-label mb-2">Returns</p>
+                            <h3 class="stats-number">3</h3>
+                            <small><i class="bi bi-arrow-down"></i> -50% from yesterday</small>
+                        </div>
+                        <div>
+                            <i class="bi bi-arrow-return-left stats-icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Cards Row 2 -->
+    <div class="row mb-4">
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 mb-3">
+            <div class="card stats-card-primary h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="stats-label mb-2">Cash Sales</p>
+                            <h3 class="stats-number">₱8,200</h3>
+                            <small>66% of total sales</small>
+                        </div>
+                        <div>
+                            <i class="bi bi-cash-stack stats-icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 mb-3">
+            <div class="card stats-card-success h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="stats-label mb-2">Card Sales</p>
+                            <h3 class="stats-number">₱4,250</h3>
+                            <small>34% of total sales</small>
+                        </div>
+                        <div>
+                            <i class="bi bi-credit-card stats-icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 mb-3">
+            <div class="card stats-card-warning h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="stats-label mb-2">Low Stock Items</p>
+                            <h3 class="stats-number">12</h3>
+                            <small>Requires attention</small>
+                        </div>
+                        <div>
+                            <i class="bi bi-exclamation-triangle stats-icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 mb-3">
+            <div class="card stats-card-info h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="stats-label mb-2">Discounts Given</p>
+                            <h3 class="stats-number">₱1,240</h3>
+                            <small>10% of total sales</small>
+                        </div>
+                        <div>
+                            <i class="bi bi-percent stats-icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 mb-3">
+            <div class="card stats-card-dark h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="stats-label mb-2">Active Products</p>
+                            <h3 class="stats-number">1,245</h3>
+                            <small>In inventory</small>
+                        </div>
+                        <div>
+                            <i class="bi bi-box stats-icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 mb-3">
+            <div class="card stats-card-orange h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="stats-label mb-2">Pending Orders</p>
+                            <h3 class="stats-number">7</h3>
+                            <small>Awaiting processing</small>
+                        </div>
+                        <div>
+                            <i class="bi bi-clock stats-icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Update current date in dashboard header
+    function updateDate() {
+        const now = new Date();
+        const dateElement = document.getElementById('currentDate');
+        if (dateElement) {
+            dateElement.textContent = now.toLocaleDateString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+    }
+
+    // Initialize date
+    updateDate();
+</script>

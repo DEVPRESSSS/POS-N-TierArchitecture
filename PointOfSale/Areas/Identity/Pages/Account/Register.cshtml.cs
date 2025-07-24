@@ -77,17 +77,21 @@ namespace PointOfSale.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)
         {
-            if (Input == null)
-            {
-                Input = new InputModel();
+            if (!_roleManager.RoleExistsAsync(SD.Cashier).GetAwaiter().GetResult()){
+                _roleManager.CreateAsync(new IdentityRole(SD.Admin)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(SD.Cashier)).GetAwaiter().GetResult();
             }
-
-            Input.RoleList = _roleManager.Roles.Select(x => x.Name).Select(i => new SelectListItem
+            Input = new()
             {
-                Text = i,
-                Value = i
-            });
+                RoleList = _roleManager.Roles.Select(x => x.Name).Select(i => new SelectListItem
+                {
+                    Text = i,
+                    Value = i
 
+
+                })
+
+            };
 
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();

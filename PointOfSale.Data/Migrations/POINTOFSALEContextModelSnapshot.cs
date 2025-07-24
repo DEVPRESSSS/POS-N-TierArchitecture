@@ -173,12 +173,10 @@ namespace PointOfSale.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -215,12 +213,10 @@ namespace PointOfSale.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -234,313 +230,428 @@ namespace PointOfSale.Data.Migrations
                 {
                     b.Property<int>("IdCategory")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("idCategory");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdCategory"), 1L, 1);
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("description");
 
                     b.Property<bool?>("IsActive")
-                        .HasColumnType("bit");
+                        .HasColumnType("bit")
+                        .HasColumnName("isActive");
 
                     b.Property<DateTime?>("RegistrationDate")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasColumnName("registrationDate")
+                        .HasDefaultValueSql("(getdate())");
 
-                    b.HasKey("IdCategory");
+                    b.HasKey("IdCategory")
+                        .HasName("PK__Category__79D361B6930E16FF");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Category", (string)null);
                 });
 
             modelBuilder.Entity("PointOfSale.Model.CorrelativeNumber", b =>
                 {
                     b.Property<int>("IdCorrelativeNumber")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("idCorrelativeNumber");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdCorrelativeNumber"), 1L, 1);
 
                     b.Property<DateTime?>("DateUpdate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime")
+                        .HasColumnName("dateUpdate");
 
                     b.Property<int?>("LastNumber")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("lastNumber");
 
                     b.Property<string>("Management")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("management");
 
                     b.Property<int?>("QuantityDigits")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("quantityDigits");
 
-                    b.HasKey("IdCorrelativeNumber");
+                    b.HasKey("IdCorrelativeNumber")
+                        .HasName("PK__Correlat__D71CDFB02EFC51E4");
 
-                    b.ToTable("CorrelativeNumbers");
+                    b.ToTable("CorrelativeNumber", (string)null);
                 });
 
             modelBuilder.Entity("PointOfSale.Model.DetailSale", b =>
                 {
                     b.Property<int>("IdDetailSale")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("idDetailSale");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdDetailSale"), 1L, 1);
 
                     b.Property<string>("BrandProduct")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("brandProduct");
 
                     b.Property<string>("CategoryProducty")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("categoryProducty");
 
                     b.Property<string>("DescriptionProduct")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("descriptionProduct");
 
                     b.Property<int?>("IdProduct")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("idProduct");
 
                     b.Property<int?>("IdSale")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("IdSaleNavigationIdSale")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("idSale");
 
                     b.Property<decimal?>("Price")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(10,2)")
+                        .HasColumnName("price");
 
                     b.Property<int?>("Quantity")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("quantity");
 
                     b.Property<decimal?>("Total")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(10,2)")
+                        .HasColumnName("total");
 
-                    b.HasKey("IdDetailSale");
+                    b.HasKey("IdDetailSale")
+                        .HasName("PK__DetailSa__D072342E21B249E9");
 
-                    b.HasIndex("IdSaleNavigationIdSale");
+                    b.HasIndex("IdSale");
 
-                    b.ToTable("DetailSales");
+                    b.ToTable("DetailSale", (string)null);
                 });
 
             modelBuilder.Entity("PointOfSale.Model.Menu", b =>
                 {
                     b.Property<int>("IdMenu")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("idMenu");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdMenu"), 1L, 1);
 
                     b.Property<string>("Controller")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(30)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(30)")
+                        .HasColumnName("controller");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(30)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(30)")
+                        .HasColumnName("description");
 
                     b.Property<string>("Icon")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(30)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(30)")
+                        .HasColumnName("icon");
 
                     b.Property<int?>("IdMenuParent")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("IdMenuParentNavigationIdMenu")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("idMenuParent");
 
                     b.Property<bool?>("IsActive")
-                        .HasColumnType("bit");
+                        .HasColumnType("bit")
+                        .HasColumnName("isActive");
 
                     b.Property<string>("PageAction")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(30)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(30)")
+                        .HasColumnName("pageAction");
 
                     b.Property<DateTime?>("RegistrationDate")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasColumnName("registrationDate")
+                        .HasDefaultValueSql("(getdate())");
 
-                    b.HasKey("IdMenu");
+                    b.HasKey("IdMenu")
+                        .HasName("PK__Menu__C26AF48328C80B96");
 
-                    b.HasIndex("IdMenuParentNavigationIdMenu");
+                    b.HasIndex("IdMenuParent");
 
-                    b.ToTable("Menus");
+                    b.ToTable("Menu", (string)null);
                 });
 
             modelBuilder.Entity("PointOfSale.Model.Negocio", b =>
                 {
                     b.Property<int>("IdNegocio")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdNegocio"), 1L, 1);
+                        .HasColumnType("int")
+                        .HasColumnName("idNegocio");
 
                     b.Property<string>("Correo")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("correo");
 
                     b.Property<string>("Direccion")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("direccion");
 
                     b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("nombre");
 
                     b.Property<string>("NombreLogo")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("nombreLogo");
 
                     b.Property<string>("NumeroDocumento")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("numeroDocumento");
 
                     b.Property<decimal?>("PorcentajeImpuesto")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(10,2)")
+                        .HasColumnName("porcentajeImpuesto");
 
                     b.Property<string>("SimboloMoneda")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(5)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(5)")
+                        .HasColumnName("simboloMoneda");
 
                     b.Property<string>("Telefono")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("telefono");
 
                     b.Property<string>("UrlLogo")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(500)")
+                        .HasColumnName("urlLogo");
 
-                    b.HasKey("IdNegocio");
+                    b.HasKey("IdNegocio")
+                        .HasName("PK__Negocio__70E1E107B97CE30F");
 
-                    b.ToTable("Negocios");
+                    b.ToTable("Negocio", (string)null);
                 });
 
             modelBuilder.Entity("PointOfSale.Model.Product", b =>
                 {
                     b.Property<int>("IdProduct")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("idProduct");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdProduct"), 1L, 1);
 
                     b.Property<string>("BarCode")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("barCode");
 
                     b.Property<string>("Brand")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("brand");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("description");
 
                     b.Property<int?>("IdCategory")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("IdCategoryNavigationIdCategory")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("idCategory");
 
                     b.Property<bool?>("IsActive")
-                        .HasColumnType("bit");
+                        .HasColumnType("bit")
+                        .HasColumnName("isActive");
 
                     b.Property<byte[]>("Photo")
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("varbinary(max)")
+                        .HasColumnName("photo");
 
                     b.Property<decimal?>("Price")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(10,2)")
+                        .HasColumnName("price");
 
                     b.Property<int?>("Quantity")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("quantity");
 
                     b.Property<DateTime?>("RegistrationDate")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasColumnName("registrationDate")
+                        .HasDefaultValueSql("(getdate())");
 
-                    b.HasKey("IdProduct");
+                    b.HasKey("IdProduct")
+                        .HasName("PK__Product__5EEC79D18F8E118B");
 
-                    b.HasIndex("IdCategoryNavigationIdCategory");
+                    b.HasIndex("IdCategory");
 
-                    b.ToTable("Products");
+                    b.ToTable("Product", (string)null);
                 });
 
             modelBuilder.Entity("PointOfSale.Model.RolMenu", b =>
                 {
                     b.Property<int>("IdRolMenu")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("idRolMenu");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdRolMenu"), 1L, 1);
 
                     b.Property<int?>("IdMenu")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("IdMenuNavigationIdMenu")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("idMenu");
 
                     b.Property<int?>("IdRol")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("idRol");
 
                     b.Property<bool?>("IsActive")
-                        .HasColumnType("bit");
+                        .HasColumnType("bit")
+                        .HasColumnName("isActive");
 
                     b.Property<DateTime?>("RegistrationDate")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasColumnName("registrationDate")
+                        .HasDefaultValueSql("(getdate())");
 
-                    b.HasKey("IdRolMenu");
+                    b.HasKey("IdRolMenu")
+                        .HasName("PK__RolMenu__CD2045D86DACA6AF");
 
-                    b.HasIndex("IdMenuNavigationIdMenu");
+                    b.HasIndex("IdMenu");
 
-                    b.ToTable("RolMenus");
+                    b.ToTable("RolMenu", (string)null);
                 });
 
             modelBuilder.Entity("PointOfSale.Model.Sale", b =>
                 {
                     b.Property<int>("IdSale")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("idSale");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdSale"), 1L, 1);
 
                     b.Property<string>("ClientName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(20)")
+                        .HasColumnName("clientName");
 
                     b.Property<string>("CustomerDocument")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(10)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(10)")
+                        .HasColumnName("customerDocument");
 
                     b.Property<int?>("IdTypeDocumentSale")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("IdTypeDocumentSaleNavigationIdTypeDocumentSale")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("idTypeDocumentSale");
 
                     b.Property<string>("IdUsers")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(450)")
+                        .HasColumnName("idUsers");
 
                     b.Property<DateTime?>("RegistrationDate")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasColumnName("registrationDate")
+                        .HasDefaultValueSql("(getdate())");
 
                     b.Property<string>("SaleNumber")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(6)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(6)")
+                        .HasColumnName("saleNumber");
 
                     b.Property<decimal?>("Subtotal")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<decimal?>("Total")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(10,2)")
+                        .HasColumnName("total");
 
                     b.Property<decimal?>("TotalTaxes")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(10,2)")
+                        .HasColumnName("totalTaxes");
 
-                    b.HasKey("IdSale");
+                    b.HasKey("IdSale")
+                        .HasName("PK__Sale__C4AEB198091B7829");
 
-                    b.HasIndex("IdTypeDocumentSaleNavigationIdTypeDocumentSale");
+                    b.HasIndex("IdTypeDocumentSale");
 
                     b.HasIndex("IdUsers");
 
-                    b.ToTable("Sales");
+                    b.ToTable("Sale", (string)null);
                 });
 
             modelBuilder.Entity("PointOfSale.Model.TypeDocumentSale", b =>
                 {
                     b.Property<int>("IdTypeDocumentSale")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("idTypeDocumentSale");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdTypeDocumentSale"), 1L, 1);
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("description");
 
                     b.Property<bool?>("IsActive")
-                        .HasColumnType("bit");
+                        .HasColumnType("bit")
+                        .HasColumnName("isActive");
 
                     b.Property<DateTime?>("RegistrationDate")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasColumnName("registrationDate")
+                        .HasDefaultValueSql("(getdate())");
 
-                    b.HasKey("IdTypeDocumentSale");
+                    b.HasKey("IdTypeDocumentSale")
+                        .HasName("PK__TypeDocu__18211B893F81F3B8");
 
-                    b.ToTable("TypeDocumentSales");
+                    b.ToTable("TypeDocumentSale", (string)null);
                 });
 
             modelBuilder.Entity("PointOfSale.Model.ApplicationUser", b =>
@@ -613,7 +724,8 @@ namespace PointOfSale.Data.Migrations
                 {
                     b.HasOne("PointOfSale.Model.Sale", "IdSaleNavigation")
                         .WithMany("DetailSales")
-                        .HasForeignKey("IdSaleNavigationIdSale");
+                        .HasForeignKey("IdSale")
+                        .HasConstraintName("FK__DetailSal__idSal__300424B4");
 
                     b.Navigation("IdSaleNavigation");
                 });
@@ -622,7 +734,8 @@ namespace PointOfSale.Data.Migrations
                 {
                     b.HasOne("PointOfSale.Model.Menu", "IdMenuParentNavigation")
                         .WithMany("InverseIdMenuParentNavigation")
-                        .HasForeignKey("IdMenuParentNavigationIdMenu");
+                        .HasForeignKey("IdMenuParent")
+                        .HasConstraintName("FK__Menu__idMenuPare__108B795B");
 
                     b.Navigation("IdMenuParentNavigation");
                 });
@@ -631,7 +744,8 @@ namespace PointOfSale.Data.Migrations
                 {
                     b.HasOne("PointOfSale.Model.Category", "IdCategoryNavigation")
                         .WithMany("Products")
-                        .HasForeignKey("IdCategoryNavigationIdCategory");
+                        .HasForeignKey("IdCategory")
+                        .HasConstraintName("FK__Product__idCateg__22AA2996");
 
                     b.Navigation("IdCategoryNavigation");
                 });
@@ -640,7 +754,8 @@ namespace PointOfSale.Data.Migrations
                 {
                     b.HasOne("PointOfSale.Model.Menu", "IdMenuNavigation")
                         .WithMany("RolMenus")
-                        .HasForeignKey("IdMenuNavigationIdMenu");
+                        .HasForeignKey("IdMenu")
+                        .HasConstraintName("FK__RolMenu__idMenu__182C9B23");
 
                     b.Navigation("IdMenuNavigation");
                 });
@@ -649,7 +764,8 @@ namespace PointOfSale.Data.Migrations
                 {
                     b.HasOne("PointOfSale.Model.TypeDocumentSale", "IdTypeDocumentSaleNavigation")
                         .WithMany("Sales")
-                        .HasForeignKey("IdTypeDocumentSaleNavigationIdTypeDocumentSale");
+                        .HasForeignKey("IdTypeDocumentSale")
+                        .HasConstraintName("FK__Sale__idTypeDocu__2B3F6F97");
 
                     b.HasOne("PointOfSale.Model.ApplicationUser", "User")
                         .WithMany("Sales")

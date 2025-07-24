@@ -16,4 +16,8 @@
     <ProjectReference Include="..\PointOfSale.Model\PointOfSale.Model.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

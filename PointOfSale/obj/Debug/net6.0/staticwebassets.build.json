@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "nWLmO9ZEtBu/Q9kzGXMxSMYp5Oxw72yyyFeoD1qWND8=",
+  "Hash": "MefsyIpkVaLXs2erd1CAk8nl7EkQ0AeiGXVQdwJ2wok=",
   "Source": "PointOfSale",
   "BasePath": "_content/PointOfSale",
   "Mode": "Default",
@@ -1649,6 +1649,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\views\\SalesNewSale.js"
+    },
+    {
+      "Identity": "D:\\004_PointOfSale_AspNetCore\\PointOfSale\\PointOfSale\\wwwroot\\js\\views\\SalesNewSalesCashier.js",
+      "SourceId": "PointOfSale",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\004_PointOfSale_AspNetCore\\PointOfSale\\PointOfSale\\wwwroot\\",
+      "BasePath": "_content/PointOfSale",
+      "RelativePath": "js/views/SalesNewSalesCashier.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\views\\SalesNewSalesCashier.js"
     },
     {
       "Identity": "D:\\004_PointOfSale_AspNetCore\\PointOfSale\\PointOfSale\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",

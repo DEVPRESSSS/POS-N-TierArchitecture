@@ -67,7 +67,7 @@ Dashboard Template and UI Kit. It is very powerful bootstrap admin dashboard, wh
                   <ul class="collapse " id="dashboard" data-parent="#sidebar-menu">
                     <div class="sub-menu">
                       <li class="">
-                        <a class="sidenav-item-link" href="@Url.Action("DashBoard","Admin")">
+                                    <a class="sidenav-item-link" href="@Url.Action("DashBoard","Admin",new {area= "Admin"})">
                           <span class="nav-text">DashBoard</span>
                         </a>
                       </li>
@@ -86,13 +86,13 @@ Dashboard Template and UI Kit. It is very powerful bootstrap admin dashboard, wh
                   <ul class="collapse " id="app" data-parent="#sidebar-menu">
                     <div class="sub-menu">
                       <li class="">
-                        <a class="sidenav-item-link" href="@Url.Action("Categories","Inventory")">
+                            <a class="sidenav-item-link" href="@Url.Action("Categories","Inventory",new {area= "Admin"})">
                           <span class="nav-text">Categories</span>
                         </a>
                       </li>
 
                       <li class="">
-                        <a class="sidenav-item-link" href="@Url.Action("Products","Inventory")">
+                            <a class="sidenav-item-link" href="@Url.Action("Products","Inventory",new {area= "Admin"})">
                           <span class="nav-text">Products</span>
                         </a>
                       </li>
@@ -112,13 +112,13 @@ Dashboard Template and UI Kit. It is very powerful bootstrap admin dashboard, wh
                   <ul class="collapse " id="components" data-parent="#sidebar-menu">
                     <div class="sub-menu">
                       <li class="">
-                        <a class="sidenav-item-link" href="@Url.Action("NewSale","Sales")">
+                        <a class="sidenav-item-link" href="@Url.Action("NewSale","Sales",new {area= "Admin"})">
                           <span class="nav-text">New sale</span>
                         </a>
                       </li>
 
                       <li class="">
-                        <a class="sidenav-item-link" href="@Url.Action("SalesHistory","Sales")">
+                        <a class="sidenav-item-link" href="@Url.Action("SalesHistory","Sales",new {area= "Admin"})">
                           <span class="nav-text">Sales history</span>
                         </a>
                       </li>
@@ -137,7 +137,7 @@ Dashboard Template and UI Kit. It is very powerful bootstrap admin dashboard, wh
                   <ul class="collapse" id="icons" data-parent="#sidebar-menu">
                     <div class="sub-menu">
                       <li class="">
-                        <a class="sidenav-item-link" href="@Url.Action("SalesReport","Reports")">
+                         <a class="sidenav-item-link" href="@Url.Action("SalesReport","Reports",new {area= "Admin"})">
                           <span class="nav-text">Sales report</span>
                         </a>
                       </li>
@@ -173,15 +173,7 @@ Dashboard Template and UI Kit. It is very powerful bootstrap admin dashboard, wh
               <div class="navbar-right ">
                 <ul class="nav navbar-nav">
    
-                  <!-- User Account -->
-                 @* <li class="dropdown user-menu">
-                    <button href="#" class="nav-link">
-                      <img src="assets/img/user/user.png" class="user-image" alt="User Image" />
-                      <span class="d-none d-lg-inline-block">Abdus Salam</span>
-                    </button>
-                  </li>*@
-@*                  @await Component.InvokeAsync("MenuUser")
- *@        
+   
                 
                 <partial name="_LoginPartial"/>
                 </ul>
@@ -204,7 +196,7 @@ Dashboard Template and UI Kit. It is very powerful bootstrap admin dashboard, wh
     <footer class="footer mt-auto">
       <div class="copyright bg-white">
         <p>
-          Copyright &copy; <span id="copy-year"></span> a template by <a class="text-primary" href="https://themefisher.com" target="_blank">Themefisher</a>.
+            Modified and improved by Devpress_101
         </p>
       </div>
       <script>

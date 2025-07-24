@@ -1,60 +1,196 @@
-﻿<!DOCTYPE html>
+﻿@using PointOfSale.Utilities
+
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Sleek Dashboard - Free Bootstrap 4 Admin Dashboard Template and UI Kit. It is very powerful bootstrap admin dashboard, which allows you to build products like admin panels, content management systems and CRMs etc.">
-  
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SIMPLE - POS</title>
-    
+
     <!-- GOOGLE FONTS -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500|Poppins:400,500,600,700|Roboto:400,500" rel="stylesheet" />
 
     <link href="https://cdn.materialdesignicons.com/4.4.95/css/materialdesignicons.min.css" rel="stylesheet" />
-  
 
     <link id="sleek-css" rel="stylesheet" href="~/css/sleek.css" />
     <link href="~/plugins/toastr/toastr.css" rel="stylesheet">
     <link href="~/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 
     <link href="~/img/favicon.png" rel="shortcut icon" />
-    <style>
-        .sa-icon{
-            margin-bottom: 35px !important;
-        }
 
-        div.sweet-alert > p.lead {
-            margin-bottom: 10px !important;
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
         }
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        .card {
+            border: none;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            border-radius: 0.75rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+        .stats-card-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .stats-card-success {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+        .stats-card-warning {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+        .stats-card-info {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            color: #333;
+        }
+        .stats-card-dark {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+        }
+        .stats-card-orange {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            color: #333;
+        }
+        .stats-icon {
+            font-size: 2.5rem;
+            opacity: 0.8;
+        }
+        .stats-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin: 0;
+        }
+        .stats-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+        .dashboard-header {
+            margin-bottom: 2rem;
+        }
+        .dashboard-title {
+            font-weight: 600;
+            color: #495057;
+        }
+        .time-display {
+            font-size: 1.1rem;
+            color: #6c757d;
+        }
+        .content-wrapper {
+            min-height: calc(100vh - 76px);
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+        
+        .content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 0;
+        }
+   /*      
+        media (max-width: 768px) {
+            .content-wrapper {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            .content {
+                padding: 1rem 0;
+            }
+        }
+        
+        media (max-width: 576px) {
+            .content-wrapper {
+                padding-left: 0.75rem;
+                padding-right: 0.75rem;
+            }
+            .content {
+                padding: 0.75rem 0;
+            }
+        } */
     </style>
     @await RenderSectionAsync("StylesPOS", required: false)
-  </head>
-
-
+</head>
 <body class="header-fixed sidebar-fixed sidebar-dark header-light" id="body">
 
-          <div class="content-wrapper">
-            <div class="content">
-                @RenderBody()
-            </div> 
-        </div> 
+    @if (User.IsInRole(SD.Cashier))
+    {
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg shadow-sm bg-dark ">
+            <div class="container-fluid">
+                <a class="navbar-brand text-white" href="#">
+                    DEVPRESS STORE
+                </a>
+                <button class="navbar-toggler text-white bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon "></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <div class="w-100 d-flex justify-content-center">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link text-white active" href="@Url.Action("Dashboard","Home", new {area= "Cashier"})"><i class="bi bi-speedometer2"></i> Dashboard</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="@Url.Action("NewSale", "Sales",new {area= "Cashier"})"><i class="bi bi-plus-circle"></i> New Sale</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="#"><i class="bi bi-receipt"></i> My Sales</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    }
+
+    <!-- Content Wrapper -->
+    <div class="content-wrapper">
+        <div class="content">
+            @RenderBody()
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     
+    <script>
+        // Update current time
+        function updateDateTime() {
+            const now = new Date();
+            
+            // Update time in navbar
+            const timeElement = document.getElementById('currentTime');
+            if (timeElement) {
+                timeElement.textContent = now.toLocaleTimeString('en-US', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit'
+                });
+            }
+        }
+        
+        // Update time every second
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+    </script>
     
-   
-
-
-
     <script src="~/plugins/jquery/jquery.min.js"></script>
     <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/sleek.js"></script>
     <script src="~/plugins/sweetalert/sweetalert.js"></script>
-
+    <script src="~/plugins/toastr/toastr.min.js"></script>
+    <script src="~/plugins/loadingoverlay/loadingoverlay.min.js"></script>
     
-	<script src="~/plugins/toastr/toastr.min.js"></script>
-
-	<script src="~/plugins/loadingoverlay/loadingoverlay.min.js"></script>
-
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
