@@ -97,6 +97,10 @@
       "PackagePath": "staticwebassets\\js\\views\\SalesNewSale.js"
     },
     {
+      "Id": "D:\\004_PointOfSale_AspNetCore\\PointOfSale\\PointOfSale\\wwwroot\\js\\views\\SalesNewSalesCashier.js",
+      "PackagePath": "staticwebassets\\js\\views\\SalesNewSalesCashier.js"
+    },
+    {
       "Id": "D:\\004_PointOfSale_AspNetCore\\PointOfSale\\PointOfSale\\wwwroot\\js\\views\\adminUsers.js",
       "PackagePath": "staticwebassets\\js\\views\\adminUsers.js"
     },

@@ -66,8 +66,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/004_PointOfSale_AspNetCore/PointOfSale/PointOfSale/Areas/Cashier/Views/Home/Dashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQ2FzaGllclxWaWV3c1xIb21lXERhc2hib2FyZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/004_PointOfSale_AspNetCore/PointOfSale/PointOfSale/Areas/Cashier/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQ2FzaGllclxWaWV3c1xIb21lXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/004_PointOfSale_AspNetCore/PointOfSale/PointOfSale/Areas/Cashier/Views/Sales/NewSale.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQ2FzaGllclxWaWV3c1xTYWxlc1xOZXdTYWxlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/004_PointOfSale_AspNetCore/PointOfSale/PointOfSale/Areas/Cashier/Views/_ViewImports.cshtml]
