@@ -148,6 +148,17 @@ $("#btnSave").on("click", function () {
         $(`input[name="${inputs_without_value[0].name}"]`).focus();
         return;
     }
+    const quantity = parseInt($("#txtQuantity").val());
+    if (quantity === 0) {
+        const msg = "Quantity must be greater than zero";
+        if (typeof toastr !== 'undefined') {
+            toastr.warning(msg, "");
+        } else {
+            alert(msg);
+        }
+        $("#txtQuantity").focus();
+        return;
+    }
 
     const model = structuredClone(BASIC_MODEL);
     model["idProduct"] = parseInt($("#txtId").val());
@@ -158,6 +169,8 @@ $("#btnSave").on("click", function () {
     model["quantity"] = $("#txtQuantity").val();
     model["price"] = $("#txtPrice").val();
     model["isActive"] = $("#cboState").val();
+
+   
 
     const inputPhoto = document.getElementById('txtPhoto');
     const formData = new FormData();
@@ -304,4 +317,130 @@ $("#tbData tbody").on("click", ".btn-delete", function () {
             confirmDelete();
         }
     }
+});
+
+
+$(document).ready(function () {
+    // Description field validation (existing code)
+    $('#txtDescription').on('input', function () {
+        let value = $(this).val();
+        value = value.replace(/\s{2,}/g, ' ');
+        value = value.replace(/^\s+/, '');
+        $(this).val(value);
+    });
+
+    $('#txtDescription').on('paste', function (e) {
+        setTimeout(() => {
+            let value = $(this).val();
+            value = value.replace(/\s{2,}/g, ' ').replace(/^\s+/, '');
+            $(this).val(value);
+        }, 0);
+    });
+
+    $('#txtDescription').on('keypress', function (e) {
+        const currentValue = $(this).val();
+        const cursorPosition = this.selectionStart;
+        if (e.which === 32) {
+            if (cursorPosition === 0 || currentValue[cursorPosition - 1] === ' ') {
+                e.preventDefault();
+                return false;
+            }
+        }
+    });
+
+    // Brand field validation - similar to description but allow &, ., -
+    $('#txtBrand').on('input', function () {
+        let value = $(this).val();
+        value = value.replace(/\s{2,}/g, ' ');
+        value = value.replace(/^\s+/, '');
+        $(this).val(value);
+    });
+
+    $('#txtBrand').on('keypress', function (e) {
+        const currentValue = $(this).val();
+        const cursorPosition = this.selectionStart;
+        if (e.which === 32) {
+            if (cursorPosition === 0 || currentValue[cursorPosition - 1] === ' ') {
+                e.preventDefault();
+                return false;
+            }
+        }
+    });
+
+    // BarCode field validation - only alphanumeric, no spaces
+    $('#txtBarCode').on('input', function () {
+        let value = $(this).val();
+        // Remove any non-alphanumeric characters
+        value = value.replace(/[^A-Za-z0-9]/g, '');
+        $(this).val(value);
+    });
+
+    // Quantity field validation - only positive integers
+    $('#txtQuantity').on('input', function () {
+        let value = $(this).val();
+        // Remove any non-digit characters
+        value = value.replace(/[^0-9]/g, '');
+        // Ensure it doesn't start with 0 (unless it's just "0")
+        if (value.length > 1 && value[0] === '0') {
+            value = value.substring(1);
+        }
+        $(this).val(value);
+    });
+
+    // Price field validation - decimal numbers with up to 2 decimal places
+    $('#txtPrice').on('input', function () {
+        let value = $(this).val();
+        // Allow only digits and one decimal point
+        value = value.replace(/[^0-9.]/g, '');
+
+        // Ensure only one decimal point
+        const parts = value.split('.');
+        if (parts.length > 2) {
+            value = parts[0] + '.' + parts.slice(1).join('');
+        }
+
+        // Limit to 2 decimal places
+        if (parts.length === 2 && parts[1].length > 2) {
+            value = parts[0] + '.' + parts[1].substring(0, 2);
+        }
+
+        $(this).val(value);
+    });
+
+    // Prevent leading zeros in price (except for decimals like 0.50)
+    $('#txtPrice').on('blur', function () {
+        let value = $(this).val();
+        if (value && !value.includes('.') && value.length > 1 && value[0] === '0') {
+            value = value.replace(/^0+/, '') || '0';
+            $(this).val(value);
+        }
+    });
+
+    // General validation feedback - only show invalid state, no valid checkmarks
+    $('.input-validate').on('invalid', function (e) {
+        $(this).addClass('is-invalid');
+    });
+
+    $('.input-validate').on('input', function (e) {
+        if (this.validity.valid) {
+            // Remove both invalid and valid classes when input is valid
+            $(this).removeClass('is-invalid is-valid');
+        } else {
+            // Only add invalid class, don't add valid class
+            $(this).removeClass('is-valid');
+            $(this).addClass('is-invalid');
+        }
+    });
+
+    // Photo preview
+    $('#txtPhoto').on('change', function (e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                $('#imgProduct').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    });
 });

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PointOfSale.Business")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ebfe9761c22591e9e6f091dc6f0e711b21035139")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dc0d16a73f08caf2b7d2e52d8957e8ebbbf475b7")]
 [assembly: System.Reflection.AssemblyProductAttribute("PointOfSale.Business")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PointOfSale.Business")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

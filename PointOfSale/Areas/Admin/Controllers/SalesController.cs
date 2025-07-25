@@ -69,7 +69,7 @@ namespace PointOfSale.Areas.Admin.Controllers
                         .Where(c => c.Type == ClaimTypes.NameIdentifier)
                         .Select(c => c.Value).SingleOrDefault();
 
-                model.IdUsers = int.Parse(idUsuario);
+                model.IdUsers = idUsuario;
 
 
                 Sale sale_created = await _saleService.Register(_mapper.Map<Sale>(model));
@@ -98,7 +98,7 @@ namespace PointOfSale.Areas.Admin.Controllers
 
         public IActionResult ShowPDFSale(string saleNumber)
         {
-            string urlTemplateView = $"{Request.Scheme}://{Request.Host}/Template/PDFSale?saleNumber={saleNumber}";
+            string urlTemplateView = $"{Request.Scheme}://{Request.Host}/Admin/Template/PDFSale?saleNumber={saleNumber}";
 
             var pdf = new HtmlToPdfDocument()
             {

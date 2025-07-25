@@ -8,7 +8,7 @@ namespace PointOfSale.Models
         public string? SaleNumber { get; set; }
         public int? IdTypeDocumentSale { get; set; }
         public string? TypeDocumentSale { get; set; }
-        public int? IdUsers { get; set; }
+        public string? IdUsers { get; set; }
         public string? Users { get; set; }
         public string? CustomerDocument { get; set; }
         public string? ClientName { get; set; }

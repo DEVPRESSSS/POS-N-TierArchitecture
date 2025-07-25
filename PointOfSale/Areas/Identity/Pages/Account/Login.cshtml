@@ -35,15 +35,30 @@
                                     <label asp-for="Input.Email" class="form-label fw-semibold">Email Address</label>
                                     <input asp-for="Input.Email" class="form-control"
                                            autocomplete="username" aria-required="true"
+                                           maxlength="40"
+                                           pattern="[a-z0-9._%+-]+@@[a-z0-9.-]+\.[a-z]{2,}$"
+                                           title="Please enter a valid email address"
+                                           onkeypress="return event.charCode !== 32"
                                            placeholder="Enter your email" />
                                     <span asp-validation-for="Input.Email" class="text-danger small"></span>
                                 </div>
 
                                 <div class="mb-3">
                                     <label asp-for="Input.Password" class="form-label fw-semibold">Password</label>
-                                    <input asp-for="Input.Password" class="form-control"
-                                           autocomplete="current-password" aria-required="true"
-                                           placeholder="Enter your password" />
+                                    <div class="input-group">
+                                        <input asp-for="Input.Password" type="password" class="form-control"
+                                               autocomplete="current-password"
+                                               maxlength="25"
+                                               aria-required="true"
+                                               onkeypress="return event.charCode !== 32"
+                                               placeholder="Enter your password"
+                                               id="passwordInput" />
+                                        <button class="btn btn-outline-secondary border-1" type="button" id="togglePassword"
+                                                style="border-color: #ced4da; border-left: 0 ; border-top-left-radius: 0; border-bottom-left-radius: 0;"
+                                            aria-label="Toggle password visibility">
+                                            <i class="mdi mdi-eye" id="passwordIcon"></i>
+                                        </button>
+                                    </div>
                                     <span asp-validation-for="Input.Password" class="text-danger small"></span>
                                 </div>
 
@@ -57,7 +72,7 @@
                                 </div>
 
                                 <div class="d-grid mb-4">
-                                    <button type="submit" class="btn btn-primary btn-lg">Sign In</button>
+                                    <button type="submit" class="btn btn-primary btn-lg w-100">Sign In</button>
                                 </div>
 
                                 <div class="text-center">
@@ -65,14 +80,7 @@
                                         <a id="forgot-password" asp-page="./ForgotPassword"
                                            class="text-decoration-none">Forgot your password?</a>
                                     </div>
-                                    <div class="mb-2">
-                                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl"
-                                           class="text-decoration-none">Create new account</a>
-                                    </div>
-                                    <div>
-                                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation"
-                                           class="text-decoration-none small">Resend email confirmation</a>
-                                    </div>
+
                                 </div>
                             </form>
 
@@ -108,4 +116,21 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        // Toggle password visibility
+        document.getElementById('togglePassword').addEventListener('click', function () {
+            const passwordInput = document.getElementById('passwordInput');
+            const passwordIcon = document.getElementById('passwordIcon');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                passwordIcon.className = 'mdi mdi-eye-off';
+                this.setAttribute('aria-label', 'Hide password');
+            } else {
+                passwordInput.type = 'password';
+                passwordIcon.className = 'mdi mdi-eye';
+                this.setAttribute('aria-label', 'Show password');
+            }
+        });
+    </script>
 }
