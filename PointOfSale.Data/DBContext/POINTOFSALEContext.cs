@@ -34,6 +34,17 @@ namespace PointOfSale.Data.DBContext
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            //modelBuilder.Entity<DetailSale>(entity =>
+            //{
+            //    entity.HasData(new DetailSale
+            //    {
+            //        I
+            //    });
+
+            //});
+
+
             modelBuilder.Entity<Category>(entity =>
             {
                 entity.HasKey(e => e.IdCategory)

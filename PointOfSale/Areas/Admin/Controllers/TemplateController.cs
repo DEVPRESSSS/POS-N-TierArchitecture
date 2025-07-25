@@ -3,9 +3,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PointOfSale.Business.Contracts;
 using PointOfSale.Models;
+using PointOfSale.Utilities;
 
 namespace PointOfSale.Areas.Admin.Controllers
 {
+
+    [Area("Admin")]
+    [AllowAnonymous]
     public class TemplateController : Controller
     {
         private readonly ISaleService _saleService;

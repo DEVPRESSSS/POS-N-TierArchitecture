@@ -38,9 +38,9 @@ namespace PointOfSale.Business.Services
             {
                 return await _repositorySale.Register(entity);
             }
-            catch
+            catch(Exception ex)
             {
-                throw;
+                throw new Exception("Error saving Sale: " + ex.Message, ex);
             }
         }
 

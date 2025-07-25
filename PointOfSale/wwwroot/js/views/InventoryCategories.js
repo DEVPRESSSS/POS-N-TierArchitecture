@@ -56,6 +56,47 @@ $(document).ready(function () {
         ]
     });
 })
+$(document).ready(function () {
+    // Prevent consecutive spaces during typing
+    $('#txtDescription').on('input', function () {
+        let value = $(this).val();
+
+        // Remove consecutive spaces
+        value = value.replace(/\s{2,}/g, ' ');
+
+        // Remove leading spaces
+        value = value.replace(/^\s+/, '');
+
+        $(this).val(value);
+    });
+
+    // Prevent pasting consecutive spaces
+    $('#txtDescription').on('paste', function (e) {
+        setTimeout(() => {
+            let value = $(this).val();
+            value = value.replace(/\s{2,}/g, ' ').replace(/^\s+/, '');
+            $(this).val(value);
+        }, 0);
+    });
+
+    // Alternative: Prevent space key when inappropriate
+    $('#txtDescription').on('keypress', function (e) {
+        const currentValue = $(this).val();
+        const cursorPosition = this.selectionStart;
+
+        // If space key is pressed
+        if (e.which === 32) {
+            // Prevent space if:
+            // 1. At the beginning of input
+            // 2. Previous character is already a space
+            if (cursorPosition === 0 || currentValue[cursorPosition - 1] === ' ') {
+                e.preventDefault();
+                return false;
+            }
+        }
+    });
+});
+
 
 const openModal = (model = BASIC_MODEL) => {
     $("#txtId").val(model.idCategory);
@@ -71,6 +112,27 @@ $("#btnNewUser").on("click", function () {
 })
 
 $("#btnSave").on("click", function () {
+    //const inputs = $("input.input-validate").serializeArray();
+    //const inputs_without_value = inputs.filter((item) => item.value.trim() == "")
+
+    //if (inputs_without_value.length > 0) {
+    //    const msg = `You must complete the field : "${inputs_without_value[0].name}"`;
+    //    toastr.warning(msg, "");
+    //    $(`input[name="${inputs_without_value[0].name}"]`).focus();
+    //    return;
+    //}
+    const descriptionValue = $("#txtDescription").val().trim();
+    $("#txtDescription").val(descriptionValue);
+
+    // Custom validation for consecutive spaces
+    const spacePattern = /^[a-zA-Z0-9][a-zA-Z0-9.,\-_]*( [a-zA-Z0-9.,\-_]+)*$/;
+
+    if (!spacePattern.test(descriptionValue)) {
+        toastr.warning("Description cannot have consecutive spaces, leading/trailing spaces", "");
+        $("#txtDescription").focus();
+        return;
+    }
+
     const inputs = $("input.input-validate").serializeArray();
     const inputs_without_value = inputs.filter((item) => item.value.trim() == "")
 

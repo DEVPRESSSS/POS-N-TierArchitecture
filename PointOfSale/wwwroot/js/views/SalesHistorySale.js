@@ -58,7 +58,7 @@ $("#btnSearch").click(function () {
 
     $(".card-body").find("div.row").LoadingOverlay("show")
 
-    fetch(`/Sales/History?saleNumber=${saleNumber}&startDate=${startDate}&endDate=${endDate}`)
+    fetch(`/Admin/Sales/History?saleNumber=${saleNumber}&startDate=${startDate}&endDate=${endDate}`)
         .then(response => {
             $(".card-body").find("div.row").LoadingOverlay("hide")
             return response.ok ? response.json() : Promise.reject(response);
@@ -116,7 +116,7 @@ $("#tbsale tbody").on("click", ".btn-info", function () {
         )
     })
 
-    $("#linkPrint").attr("href", `/Sales/ShowPDFSale?saleNumber=${d.saleNumber}`);
+    $("#linkPrint").attr("href", `/Admin/Sales/ShowPDFSale?saleNumber=${d.saleNumber}`);
 
     $("#modalData").modal("show");
 })

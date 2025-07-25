@@ -220,7 +220,7 @@ $("#btnFinalizeSale").click(function () {
 
     $("#btnFinalizeSale").closest("div.card-body").LoadingOverlay("show")
 
-    fetch("/Sales/RegisterSale", {
+    fetch("/Admin/Sales/RegisterSale", {
         method: "POST",
         headers: { 'Content-Type': 'application/json;charset=utf-8' },
         body: JSON.stringify(sale)
@@ -240,7 +240,8 @@ $("#btnFinalizeSale").click(function () {
 
             swal("Registered!", `Sale Number : ${responseJson.object.saleNumber}`, "success");
 
-        } else {
+        }
+        else {
             swal("We're sorry", "The sale could not be registered", "error");
         }
     }).catch((error) => {
@@ -249,3 +250,42 @@ $("#btnFinalizeSale").click(function () {
 
 
 })
+
+$(document).ready(function () {
+    // Prevent consecutive spaces while typing
+    $('#txtNameClient').on('input', function () {
+        let value = $(this).val();
+
+        // Remove consecutive spaces
+        value = value.replace(/\s{2,}/g, ' ');
+
+        // Remove leading spaces
+        value = value.replace(/^\s+/, '');
+
+        $(this).val(value);
+    });
+
+    // Prevent pasting consecutive spaces or leading spaces
+    $('#txtNameClient').on('paste', function (e) {
+        setTimeout(() => {
+            let value = $(this).val();
+            value = value.replace(/\s{2,}/g, ' ').replace(/^\s+/, '');
+            $(this).val(value);
+        }, 0);
+    });
+
+    // Prevent space key at beginning or after another space
+    $('#txtNameClient').on('keypress', function (e) {
+        const currentValue = $(this).val();
+        const cursorPosition = this.selectionStart;
+
+        // If space key is pressed
+        if (e.which === 32) {
+            // Prevent space if at the start or if previous character is space
+            if (cursorPosition === 0 || currentValue[cursorPosition - 1] === ' ') {
+                e.preventDefault();
+                return false;
+            }
+        }
+    });
+});
