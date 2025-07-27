@@ -10,38 +10,9 @@ namespace PointOfSale.Utilities.Automapper
     {
         public AutoMapperProfile() {
 
-            #region Rol
-            //CreateMap<Rol, VMRol>().ReverseMap();
-            #endregion
+          
 
-            //#region User
-            //CreateMap<User, VMUser>()
-            //.ForMember(destiny =>
-            //    destiny.IsActive,
-            //    opt => opt.MapFrom(source => source.IsActive == true ? 1 : 0)
-            //)
-            //.ForMember(destiny =>
-            //    destiny.NameRol,
-            //    opt => opt.MapFrom(source => source.IdRolNavigation.Description)
-            //).ForMember(destiny =>
-            //    destiny.PhotoBase64,
-            //    opt => opt.MapFrom(source => Convert.ToBase64String(source.Photo))
-            //)
-            //.ForMember(destiny =>
-            //    destiny.Photo,
-            //    opt => opt.Ignore()
-            //);
-
-            //CreateMap<VMUser, User>()
-            //.ForMember(destiny =>
-            //    destiny.IsActive,
-            //    opt => opt.MapFrom(source => source.IsActive == 1 ? true : false)
-            //)
-            //.ForMember(destiny =>
-            //    destiny.IdRolNavigation,
-            //    opt => opt.Ignore()
-            //);
-            //#endregion
+          
 
             #region Category
             CreateMap<Category, VMCategory>()

@@ -573,3 +573,6 @@ D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale\obj\Debug\net6.0\refint\Po
 D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale\obj\Debug\net6.0\PointOfSale.pdb
 D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale\obj\Debug\net6.0\PointOfSale.genruntimeconfig.cache
 D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale\obj\Debug\net6.0\ref\PointOfSale.dll
+D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale\bin\Debug\net6.0\Utilities\LibraryPDF\libwkhtmltox.dll
+D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale\bin\Debug\net6.0\SendGrid.dll
+D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale\bin\Debug\net6.0\StarkbankEcdsa.dll

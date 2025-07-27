@@ -60,16 +60,16 @@ namespace PointOfSale.Areas.Cashier.Controllers
         public async Task<IActionResult> RegisterSale([FromBody] VMSale model)
         {
             GenericResponse<VMSale> gResponse = new GenericResponse<VMSale>();
-            //try
-            //{
+            try
+            {
 
-                //ClaimsPrincipal claimuser = HttpContext.User;
+                ClaimsPrincipal claimuser = HttpContext.User;
 
-                //string idUsuario = claimuser.Claims
-                //        .Where(c => c.Type == ClaimTypes.NameIdentifier)
-                //        .Select(c => c.Value).SingleOrDefault();
+                string idUsuario = claimuser.Claims
+                        .Where(c => c.Type == ClaimTypes.NameIdentifier)
+                        .Select(c => c.Value).SingleOrDefault();
 
-                //model.IdUsers = int.Parse(idUsuario);
+                 model.IdUsers = idUsuario;
 
 
                 Sale sale_created = await _saleService.Register(_mapper.Map<Sale>(model));
@@ -77,12 +77,12 @@ namespace PointOfSale.Areas.Cashier.Controllers
 
                 gResponse.State = true;
                 gResponse.Object = model;
-            //}
-            //catch (Exception ex)
-            //{
-            //    gResponse.State = false;
-            //    gResponse.Message = ex.Message;
-            //}
+            }
+            catch (Exception ex)
+            {
+                gResponse.State = false;
+                gResponse.Message = ex.Message;
+            }
 
             return StatusCode(StatusCodes.Status200OK, gResponse);
         }

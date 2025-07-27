@@ -75,7 +75,7 @@ namespace PointOfSale.Areas.Identity.Pages.Account
             public string? ProfilePath { get; set; }
         }
 
-        public async Task OnGetAsync(string returnUrl = null)
+        public async Task OnGetAsync(string? returnUrl = null)
         {
             if (!_roleManager.RoleExistsAsync(SD.Cashier).GetAwaiter().GetResult()){
                 _roleManager.CreateAsync(new IdentityRole(SD.Admin)).GetAwaiter().GetResult();

@@ -9,17 +9,19 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-
+using PointOfSale.Model;
 namespace PointOfSale.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class ResetPasswordModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signinManager;
 
-        public ResetPasswordModel(UserManager<IdentityUser> userManager)
+        public ResetPasswordModel(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             _userManager = userManager;
+            _signinManager = signInManager;
         }
 
         [BindProperty]
@@ -77,6 +79,12 @@ namespace PointOfSale.Areas.Identity.Pages.Account
             var result = await _userManager.ResetPasswordAsync(user, Input.Code, Input.Password);
             if (result.Succeeded)
             {
+                //await _userManager.UpdateSecurityStampAsync(user);
+                await _signinManager.SignOutAsync();
+
+                //// Sign out the user from all sessions
+                //await _signinManager.SignOutAsync();
+
                 return RedirectToPage("./ResetPasswordConfirmation");
             }
 

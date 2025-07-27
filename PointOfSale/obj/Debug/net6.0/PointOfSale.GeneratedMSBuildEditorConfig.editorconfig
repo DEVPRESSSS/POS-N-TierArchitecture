@@ -22,10 +22,6 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWRtaW5cRGFzaEJvYXJkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/004_PointOfSale_AspNetCore/PointOfSale/PointOfSale/Areas/Admin/Views/Admin/Users.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWRtaW5cVXNlcnMuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [D:/004_PointOfSale_AspNetCore/PointOfSale/PointOfSale/Areas/Admin/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -56,6 +52,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/004_PointOfSale_AspNetCore/PointOfSale/PointOfSale/Areas/Admin/Views/Template/PDFSale.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVGVtcGxhdGVcUERGU2FsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/004_PointOfSale_AspNetCore/PointOfSale/PointOfSale/Areas/Admin/Views/User/Users.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVXNlclxVc2Vycy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/004_PointOfSale_AspNetCore/PointOfSale/PointOfSale/Areas/Admin/Views/_ViewImports.cshtml]

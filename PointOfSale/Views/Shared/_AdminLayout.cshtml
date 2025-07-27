@@ -50,7 +50,7 @@ Dashboard Template and UI Kit. It is very powerful bootstrap admin dashboard, wh
             <!-- Aplication Brand -->
             <div class="app-brand">
               <a href="#" title="Example Store">
-                <span class="brand-name text-truncate">Devpress Store</span>
+                    <span class="brand-name text-truncate">DevpresTech</span>
               </a>
             </div>
             <!-- begin sidebar scrollbar -->
@@ -58,7 +58,7 @@ Dashboard Template and UI Kit. It is very powerful bootstrap admin dashboard, wh
               <!-- sidebar menu -->
               <ul class="nav sidebar-inner" id="sidebar-menu">
 
-            <li class="has-sub">
+                 <li class="has-sub">
                   <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#dashboard"
                     aria-expanded="false" aria-controls="dashboard">
                     <i class="mdi mdi-view-dashboard-outline"></i>
@@ -67,8 +67,11 @@ Dashboard Template and UI Kit. It is very powerful bootstrap admin dashboard, wh
                   <ul class="collapse " id="dashboard" data-parent="#sidebar-menu">
                     <div class="sub-menu">
                       <li class="">
-                                    <a class="sidenav-item-link" href="@Url.Action("DashBoard","Admin",new {area= "Admin"})">
+                        <a class="sidenav-item-link" href="@Url.Action("DashBoard","Admin",new {area= "Admin"})">
                           <span class="nav-text">DashBoard</span>
+                        </a>
+                        <a class="sidenav-item-link" href="@Url.Action("Users","User",new {area= "Admin"})">
+                                        <span class="nav-text">User</span>
                         </a>
                       </li>
 

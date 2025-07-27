@@ -22,11 +22,15 @@ builder.Services.AddDbContext<POINTOFSALEContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("SQL"));
 });
-
+//builder.Services.Configure<SecurityStampValidatorOptions>(options =>
+//{
+//    options.ValidationInterval = TimeSpan.FromSeconds(30);
+//});
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
 
+    //options.SignIn.RequireConfirmedEmail = true;
     // Lockout settings
     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
     options.Lockout.MaxFailedAccessAttempts = 5;

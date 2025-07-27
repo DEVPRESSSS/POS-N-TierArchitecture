@@ -14,9 +14,8 @@
                         <div class="text-center p-4">
                             <!-- You can replace this with your actual logo -->
                             <div class="mb-4">
-                                <svg width="80" height="80" viewBox="0 0 24 24" fill="currentColor" class="mb-3">
-                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
-                                </svg>
+                                 <img src="@Url.Content("~/Logo/Logo.png")" 
+                                 style="width: min(120px, 15vw); height: min(120px, 15vw); border-radius: 50%;" />
                             </div>
                             <h3 class="fw-bold mb-3">Welcome Back</h3>
                             <p class="mb-0 opacity-75">Sign in to your account to continue</p>
@@ -29,12 +28,12 @@
                             <form id="account" method="post">
                                 <h2 class="card-title mb-4 fw-bold text-dark">Sign In</h2>
 
-                                <div asp-validation-summary="All" class="alert alert-danger d-none"></div>
-
+                                <div asp-validation-summary="ModelOnly"
+                                     class="alert alert-danger @(ViewData.ModelState.IsValid ? "d-none" : "")"></div>
                                 <div class="mb-3">
                                     <label asp-for="Input.Email" class="form-label fw-semibold">Email Address</label>
                                     <input asp-for="Input.Email" class="form-control"
-                                           autocomplete="username" aria-required="true"
+                                           autocomplete="username"
                                            maxlength="40"
                                            pattern="[a-z0-9._%+-]+@@[a-z0-9.-]+\.[a-z]{2,}$"
                                            title="Please enter a valid email address"
@@ -74,6 +73,13 @@
                                 <div class="d-grid mb-4">
                                     <button type="submit" class="btn btn-primary btn-lg w-100">Sign In</button>
                                 </div>
+                         @*        <div class="text-center">
+                                    <div class="mb-2">
+                                        <a id="forgot-password" asp-page="./Register"
+                                           class="text-decoration-none">Forgot your password?</a>
+                                    </div>
+
+                                </div> *@
 
                                 <div class="text-center">
                                     <div class="mb-2">

@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIMPLE - POS</title>
+    <title>DevpressTech</title>
 
     <!-- GOOGLE FONTS -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500|Poppins:400,500,600,700|Roboto:400,500" rel="stylesheet" />
@@ -15,91 +15,8 @@
     <link id="sleek-css" rel="stylesheet" href="~/css/sleek.css" />
     <link href="~/plugins/toastr/toastr.css" rel="stylesheet">
     <link href="~/plugins/sweetalert/sweetalert.css" rel="stylesheet">
-
-    <link href="~/img/favicon.png" rel="shortcut icon" />
-
-    <style>
-       /*  body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f8f9fa;
-        }
-        .navbar-brand {
-            font-weight: 700;
-            font-size: 1.5rem;
-        }
-        .card {
-            border: none;
-            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-            border-radius: 0.75rem;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-        }
-        .stats-card-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-        .stats-card-success {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            color: white;
-        }
-        .stats-card-warning {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-        }
-        .stats-card-info {
-            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-            color: #333;
-        }
-        .stats-card-dark {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-            color: white;
-        }
-        .stats-card-orange {
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
-            color: #333;
-        }
-        .stats-icon {
-            font-size: 2.5rem;
-            opacity: 0.8;
-        }
-        .stats-number {
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin: 0;
-        }
-        .stats-label {
-            font-size: 0.9rem;
-            opacity: 0.9;
-            margin-bottom: 0.5rem;
-        }
-        .dashboard-header {
-            margin-bottom: 2rem;
-        }
-        .dashboard-title {
-            font-weight: 600;
-            color: #495057;
-        }
-        .time-display {
-            font-size: 1.1rem;
-            color: #6c757d;
-        }
-        .content-wrapper {
-            min-height: calc(100vh - 76px);
-            padding-left: 2rem;
-            padding-right: 2rem;
-        }
-        
-        .content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 1.5rem 0;
-        } */
- 
-    </style>
-    @await RenderSectionAsync("StylesPOS", required: false)
+    <link href="~/Logo/Logo.png" rel="shortcut icon" />
+     @await RenderSectionAsync("StylesPOS", required: false)
 </head>
 <body class="header-fixed sidebar-fixed sidebar-dark header-light" id="body">
 
@@ -109,7 +26,7 @@
         <nav class="navbar navbar-expand-lg shadow-sm bg-dark ">
             <div class="container-fluid">
                 <a class="navbar-brand text-white" href="#">
-                    DEVPRESS STORE
+                    DevpressTech
                 </a>
                 <button class="navbar-toggler text-white bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon "></span>
@@ -123,9 +40,9 @@
                             <li class="nav-item">
                                 <a class="nav-link text-white" href="@Url.Action("NewSale", "Sales",new {area= "Cashier"})"><i class="bi bi-plus-circle"></i> New Sale</a>
                             </li>
-                            <li class="nav-item">
+                         @*    <li class="nav-item">
                                 <a class="nav-link text-white" href="#"><i class="bi bi-receipt"></i> My Sales</a>
-                            </li>
+                            </li> *@
                         </ul>
                     </div>
                     <partial name="_LoginPartial" />
@@ -133,14 +50,13 @@
             </div>
         </nav>
     }
-
     <!-- Content Wrapper -->
-    <div class="content-wrapper">
-        <div class="content">
-            @RenderBody()
+        <div class="content-wrapper">
+            <div class="content">
+                @RenderBody()
+            </div>
         </div>
-    </div>
-
+    
     <!-- Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     
