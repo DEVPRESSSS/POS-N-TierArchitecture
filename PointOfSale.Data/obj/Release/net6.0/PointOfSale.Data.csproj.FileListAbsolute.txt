@@ -14,3 +14,5 @@ D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale.Data\obj\Release\net6.0\Po
 D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale.Data\obj\Release\net6.0\refint\PointOfSale.Data.dll
 D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale.Data\obj\Release\net6.0\PointOfSale.Data.pdb
 D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale.Data\obj\Release\net6.0\ref\PointOfSale.Data.dll
+D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale.Data\bin\Release\net6.0\PointOfSale.Data.runtimeconfig.json
+D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale.Data\obj\Release\net6.0\PointOfSale.Data.genruntimeconfig.cache

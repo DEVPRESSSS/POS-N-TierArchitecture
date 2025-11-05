@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\PointOfSale.bundle.scp.css"
     },
     {
+      "Id": "D:\\004_PointOfSale_AspNetCore\\PointOfSale\\PointOfSale\\wwwroot\\Logo\\Logo.png",
+      "PackagePath": "staticwebassets\\Logo\\Logo.png"
+    },
+    {
       "Id": "D:\\004_PointOfSale_AspNetCore\\PointOfSale\\PointOfSale\\wwwroot\\css\\sleek.css",
       "PackagePath": "staticwebassets\\css\\sleek.css"
     },
@@ -2999,6 +3003,14 @@
     {
       "Id": "D:\\004_PointOfSale_AspNetCore\\PointOfSale\\PointOfSale\\wwwroot\\plugins\\toastr\\toastr.min.js",
       "PackagePath": "staticwebassets\\plugins\\toastr\\toastr.min.js"
+    },
+    {
+      "Id": "D:\\004_PointOfSale_AspNetCore\\PointOfSale\\PointOfSale\\wwwroot\\uploads\\19a7b01a-2ee3-4c2b-afa0-f60d785d95dd.jpg",
+      "PackagePath": "staticwebassets\\uploads\\19a7b01a-2ee3-4c2b-afa0-f60d785d95dd.jpg"
+    },
+    {
+      "Id": "D:\\004_PointOfSale_AspNetCore\\PointOfSale\\PointOfSale\\wwwroot\\uploads\\6d9ec01c-1c31-47e8-be09-6a2c406476b8.jpg",
+      "PackagePath": "staticwebassets\\uploads\\6d9ec01c-1c31-47e8-be09-6a2c406476b8.jpg"
     },
     {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.PointOfSale.Microsoft.AspNetCore.StaticWebAssets.props",

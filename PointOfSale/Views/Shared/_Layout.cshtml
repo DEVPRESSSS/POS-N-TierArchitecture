@@ -34,12 +34,16 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <div class="w-100 d-flex justify-content-center">
                         <ul class="navbar-nav">
-                            <li class="nav-item">
+                        @*     <li class="nav-item">
                                 <a class="nav-link text-white active" href="@Url.Action("Dashboard","Home", new {area= "Cashier"})"><i class="bi bi-speedometer2"></i> Dashboard</a>
-                            </li>
+                            </li> *@
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="@Url.Action("NewSale", "Sales",new {area= "Cashier"})"><i class="bi bi-plus-circle"></i> New Sale</a>
+                                <a class="nav-link text-white" href="@Url.Action("NewSale", "Sales", new { area = "Cashier" })">
+                                    <i class="mdi mdi-cart-plus"></i> New Sale
+                                </a>
                             </li>
+
+
                          @*    <li class="nav-item">
                                 <a class="nav-link text-white" href="#"><i class="bi bi-receipt"></i> My Sales</a>
                             </li> *@

@@ -46,7 +46,7 @@ namespace PointOfSale.Areas.Identity.Pages.Account
             public string Code { get; set; }
         }
 
-        public IActionResult OnGet(string code = null)
+        public IActionResult OnGet(string code = null, string email = null)
         {
             if (code == null)
             {
@@ -56,7 +56,8 @@ namespace PointOfSale.Areas.Identity.Pages.Account
             {
                 Input = new InputModel
                 {
-                    Code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code))
+                    Code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code)),
+                    Email = email != null ? Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(email)) : string.Empty
                 };
                 return Page();
             }
@@ -88,6 +89,8 @@ namespace PointOfSale.Areas.Identity.Pages.Account
                 return RedirectToPage("./ResetPasswordConfirmation");
             }
 
+            Input.Password = string.Empty;
+            Input.ConfirmPassword = string.Empty;
             foreach (var error in result.Errors)
             {
                 ModelState.AddModelError(string.Empty, error.Description);

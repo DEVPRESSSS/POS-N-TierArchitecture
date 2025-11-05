@@ -2,6 +2,7 @@
 using DinkToPdf;
 using DinkToPdf.Contracts;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PointOfSale.Business.Contracts;
 using PointOfSale.Model;
@@ -21,14 +22,16 @@ namespace PointOfSale.Areas.Admin.Controllers
         private readonly ISaleService _saleService;
         private readonly IMapper _mapper;
         private readonly IConverter _converter;
+        private readonly UserManager<ApplicationUser> _userManager;
 
         public SalesController(ITypeDocumentSaleService typeDocumentSaleService,
-            ISaleService saleService, IMapper mapper, IConverter converter)
+            ISaleService saleService, IMapper mapper, IConverter converter, UserManager<ApplicationUser> userManager)
         {
             _typeDocumentSaleService = typeDocumentSaleService;
             _saleService = saleService;
             _mapper = mapper;
             _converter = converter;
+            _userManager = userManager;
         }
         public IActionResult NewSale()
         {
@@ -40,7 +43,44 @@ namespace PointOfSale.Areas.Admin.Controllers
             return View();
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetCurrentUser()
+        {
+            GenericResponse<object> gResponse = new GenericResponse<object>();
+            try
+            {
+                // Get the current user using UserManager
+                var currentUser = await _userManager.GetUserAsync(HttpContext.User);
 
+                if (currentUser == null)
+                {
+                    gResponse.State = false;
+                    gResponse.Message = "User not found";
+                    return StatusCode(StatusCodes.Status200OK, gResponse);
+                }
+
+                // Return only the necessary user information
+                var userInfo = new
+                {
+                    Id = currentUser.Id,
+                    Name = currentUser.Name,
+                    Email = currentUser.Email,
+                    UserName = currentUser.UserName,
+                    ProfilePath = currentUser.ProfilePath
+                };
+
+                gResponse.State = true;
+                gResponse.Object = userInfo;
+                gResponse.Message = "User retrieved successfully";
+            }
+            catch (Exception ex)
+            {
+                gResponse.State = false;
+                gResponse.Message = ex.Message;
+            }
+
+            return StatusCode(StatusCodes.Status200OK, gResponse);
+        }
 
         [HttpGet]
         public async Task<IActionResult> ListTypeDocumentSale()
@@ -77,11 +117,14 @@ namespace PointOfSale.Areas.Admin.Controllers
 
                 gResponse.State = true;
                 gResponse.Object = model;
-            }
+             }
             catch (Exception ex)
             {
+
                 gResponse.State = false;
-                gResponse.Message = ex.Message;
+                gResponse.Message = $"Error: {ex.Message}";
+
+                
             }
 
             return StatusCode(StatusCodes.Status200OK, gResponse);

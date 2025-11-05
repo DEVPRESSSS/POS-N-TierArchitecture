@@ -15,6 +15,15 @@ namespace PointOfSale.Models
         public string? Subtotal { get; set; }
         public string? TotalTaxes { get; set; }
         public string? Total { get; set; }
+
+        //New
+        public string? PaymentType { get; set; }
+        public string? AmountPaid { get; set; }
+        public string? Change { get; set; }
+
+        //New
+        public string? CashierName { get; set; }
+        //
         public string? RegistrationDate { get; set; }
         public virtual ICollection<VMDetailSale> DetailSales { get; set; }
     }

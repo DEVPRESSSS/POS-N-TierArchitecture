@@ -72,10 +72,14 @@ namespace PointOfSale.Utilities.Automapper
                     destiny.TypeDocumentSale,
                     opt => opt.MapFrom(source => source.IdTypeDocumentSaleNavigation.Description)
                 )
-                //.ForMember(destiny =>
-                //    destiny.Users
-                //    //opt => opt.MapFrom(source => source.IdUsersNavigation.Name)
-                //)
+				//.ForMember(destiny =>
+				//    destiny.Users
+				////opt => opt.MapFrom(source => source.IdUsersNavigation.Name)
+				//)
+                //NEW
+	             .ForMember(dest => dest.Users, opt => opt.MapFrom(src => src.User.Name))
+	                .ForMember(dest => dest.TypeDocumentSale, opt => opt.MapFrom(src => src.IdTypeDocumentSaleNavigation.Description))
+
                 .ForMember(destiny =>
                     destiny.Subtotal,
                     opt => opt.MapFrom(source => Convert.ToString(source.Subtotal.Value, new CultureInfo("es-PE")))
@@ -87,10 +91,28 @@ namespace PointOfSale.Utilities.Automapper
                 .ForMember(destiny =>
                     destiny.Total,
                     opt => opt.MapFrom(source => Convert.ToString(source.Total.Value, new CultureInfo("es-PE")))
+
+
+                //New
+                ).ForMember(destiny =>
+                    destiny.AmountPaid,
+                    opt => opt.MapFrom(source => Convert.ToString(source.AmountPaid.Value, new CultureInfo("es-PE")))
+
+                ).ForMember(destiny =>
+                    destiny.Change,
+                    opt => opt.MapFrom(source => Convert.ToString(source.ChangeAmount.Value, new CultureInfo("es-PE")))
+                ).ForMember(destiny =>
+                    destiny.PaymentType,
+                    opt => opt.MapFrom(source => source.PaymentType)
+
+                //
+
                 ).ForMember(destiny =>
                     destiny.RegistrationDate,
                     opt => opt.MapFrom(source => source.RegistrationDate.Value.ToString("dd/MM/yyyy"))
-                );
+                ).ForMember(dest => dest.DetailSales, opt => opt.MapFrom(src => src.DetailSales)); 
+
+
 
             CreateMap<VMSale, Sale>()
                 .ForMember(destiny =>
@@ -104,11 +126,29 @@ namespace PointOfSale.Utilities.Automapper
                 .ForMember(destiny =>
                     destiny.Total,
                     opt => opt.MapFrom(source => Convert.ToDecimal(source.Total, new CultureInfo("es-PE")))
+                )
+                // ADD THESE MISSING MAPPINGS:
+                .ForMember(destiny =>
+                    destiny.AmountPaid,
+                    opt => opt.MapFrom(source => string.IsNullOrEmpty(source.AmountPaid) ? (decimal?)null : Convert.ToDecimal(source.AmountPaid, new CultureInfo("es-PE")))
+                )
+                .ForMember(destiny =>
+                    destiny.ChangeAmount,
+                    opt => opt.MapFrom(source => string.IsNullOrEmpty(source.Change) ? (decimal?)null : Convert.ToDecimal(source.Change, new CultureInfo("es-PE")))
+                )
+                .ForMember(destiny =>
+                    destiny.PaymentType,
+                    opt => opt.MapFrom(source => source.PaymentType)
                 );
+
             #endregion
 
             #region DetailSale
             CreateMap<DetailSale, VMDetailSale>()
+                .ForMember(destiny =>
+                    destiny.DescriptionProduct,
+                    opt => opt.MapFrom(source => source.DescriptionProduct) 
+                )
                 .ForMember(destiny =>
                     destiny.Price,
                     opt => opt.MapFrom(source => Convert.ToString(source.Price.Value, new CultureInfo("es-PE")))
@@ -127,6 +167,8 @@ namespace PointOfSale.Utilities.Automapper
                     destiny.Total,
                     opt => opt.MapFrom(source => Convert.ToDecimal(source.Total, new CultureInfo("es-PE")))
                 );
+            #endregion
+
 
             CreateMap<DetailSale, VMSalesReport>()
                 .ForMember(destiny =>
@@ -173,7 +215,6 @@ namespace PointOfSale.Utilities.Automapper
                     destiny.Total,
                     opt => opt.MapFrom(source => Convert.ToString(source.Total.Value, new CultureInfo("es-PE")))
                 );
-            #endregion
 
             #region Menu
             CreateMap<Menu, VMMenu>()

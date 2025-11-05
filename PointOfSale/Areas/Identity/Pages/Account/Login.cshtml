@@ -138,5 +138,17 @@
                 this.setAttribute('aria-label', 'Show password');
             }
         });
+
+         // Clear fields if model state is invalid
+        document.addEventListener("DOMContentLoaded", function () {
+            const hasError = '@(!ViewData.ModelState.IsValid)'; // returns 'True' or 'False'
+            if (hasError === 'False') return; // valid, do nothing
+
+            // Clear input fields
+            const emailInput = document.querySelector('[name="Input.Email"]');
+            const passwordInput = document.querySelector('[name="Input.Password"]');
+            if (emailInput) emailInput.value = '';
+            if (passwordInput) passwordInput.value = '';
+        });
     </script>
 }

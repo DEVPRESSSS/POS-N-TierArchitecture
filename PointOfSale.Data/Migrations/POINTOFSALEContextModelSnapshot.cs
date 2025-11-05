@@ -115,7 +115,7 @@ namespace PointOfSale.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
@@ -254,6 +254,11 @@ namespace PointOfSale.Data.Migrations
                     b.HasKey("IdCategory")
                         .HasName("PK__Category__79D361B6930E16FF");
 
+                    b.HasIndex("Description")
+                        .IsUnique()
+                        .HasDatabaseName("IX_Category_Description")
+                        .HasFilter("[description] IS NOT NULL");
+
                     b.ToTable("Category", (string)null);
                 });
 
@@ -288,6 +293,16 @@ namespace PointOfSale.Data.Migrations
                         .HasName("PK__Correlat__D71CDFB02EFC51E4");
 
                     b.ToTable("CorrelativeNumber", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            IdCorrelativeNumber = 1,
+                            DateUpdate = new DateTime(2025, 7, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LastNumber = 0,
+                            Management = "Sale",
+                            QuantityDigits = 6
+                        });
                 });
 
             modelBuilder.Entity("PointOfSale.Model.DetailSale", b =>
@@ -569,10 +584,16 @@ namespace PointOfSale.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdSale"), 1L, 1);
 
+                    b.Property<decimal?>("AmountPaid")
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<decimal?>("ChangeAmount")
+                        .HasColumnType("decimal(10,2)");
+
                     b.Property<string>("ClientName")
-                        .HasMaxLength(20)
+                        .HasMaxLength(50)
                         .IsUnicode(false)
-                        .HasColumnType("varchar(20)")
+                        .HasColumnType("varchar(50)")
                         .HasColumnName("clientName");
 
                     b.Property<string>("CustomerDocument")
@@ -589,6 +610,9 @@ namespace PointOfSale.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)")
                         .HasColumnName("idUsers");
+
+                    b.Property<string>("PaymentType")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("RegistrationDate")
                         .ValueGeneratedOnAdd()
@@ -652,19 +676,44 @@ namespace PointOfSale.Data.Migrations
                         .HasName("PK__TypeDocu__18211B893F81F3B8");
 
                     b.ToTable("TypeDocumentSale", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            IdTypeDocumentSale = 1,
+                            Description = "Ticket",
+                            IsActive = true
+                        },
+                        new
+                        {
+                            IdTypeDocumentSale = 2,
+                            Description = "Invoice",
+                            IsActive = true
+                        });
                 });
 
             modelBuilder.Entity("PointOfSale.Model.ApplicationUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
+                    b.Property<DateTime?>("DateCreated")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProfilePath")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.HasIndex("Name")
+                        .IsUnique()
+                        .HasFilter("[Name] IS NOT NULL");
+
+                    b.HasIndex("PhoneNumber")
+                        .IsUnique()
+                        .HasFilter("[PhoneNumber] IS NOT NULL");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });

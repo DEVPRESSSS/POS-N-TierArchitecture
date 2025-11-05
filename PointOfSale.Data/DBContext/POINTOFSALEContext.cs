@@ -21,11 +21,9 @@ namespace PointOfSale.Data.DBContext
         public virtual DbSet<Menu> Menus { get; set; } = null!;
         public virtual DbSet<Negocio> Negocios { get; set; } = null!;
         public virtual DbSet<Product> Products { get; set; } = null!;
-        //public virtual DbSet<Rol> Rols { get; set; } = null!;
         public virtual DbSet<RolMenu> RolMenus { get; set; } = null!;
         public virtual DbSet<Sale> Sales { get; set; } = null!;
         public virtual DbSet<TypeDocumentSale> TypeDocumentSales { get; set; } = null!;
-        //public virtual DbSet<User> Users { get; set; } = null!;
         public virtual DbSet<ApplicationUser> AppUsers { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -34,15 +32,14 @@ namespace PointOfSale.Data.DBContext
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
-            //modelBuilder.Entity<DetailSale>(entity =>
-            //{
-            //    entity.HasData(new DetailSale
-            //    {
-            //        I
-            //    });
-
-            //});
+            //Application User
+            modelBuilder.Entity<ApplicationUser>(entity =>
+            {
+                entity.HasIndex(e => e.Name)
+                      .IsUnique();
+                entity.HasIndex(e => e.PhoneNumber)
+                     .IsUnique();
+            });
 
 
             modelBuilder.Entity<Category>(entity =>
@@ -58,6 +55,10 @@ namespace PointOfSale.Data.DBContext
                     .HasMaxLength(50)
                     .IsUnicode(false)
                     .HasColumnName("description");
+                // Add unique index for Description
+                entity.HasIndex(e => e.Description)
+                    .IsUnique()
+                    .HasDatabaseName("IX_Category_Description");
 
                 entity.Property(e => e.IsActive).HasColumnName("isActive");
 
@@ -324,7 +325,7 @@ namespace PointOfSale.Data.DBContext
                 entity.Property(e => e.IdSale).HasColumnName("idSale");
 
                 entity.Property(e => e.ClientName)
-                    .HasMaxLength(20)
+                    .HasMaxLength(50)
                     .IsUnicode(false)
                     .HasColumnName("clientName");
 
@@ -390,11 +391,30 @@ namespace PointOfSale.Data.DBContext
                     .HasDefaultValueSql("(getdate())");
             });
 
+		
 
-            base.OnModelCreating(modelBuilder);
 
-        }
+			modelBuilder.Entity<TypeDocumentSale>().HasData(
+		         new TypeDocumentSale { IdTypeDocumentSale = 1, Description = "Ticket", IsActive = true },
+		         new TypeDocumentSale { IdTypeDocumentSale = 2, Description = "Invoice", IsActive = true }
+	         );
 
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+			        modelBuilder.Entity<CorrelativeNumber>().HasData(
+			           new CorrelativeNumber
+			           {
+				           IdCorrelativeNumber = 1,
+				           LastNumber = 0,
+				           QuantityDigits = 6,
+				           Management = "Sale",
+				           DateUpdate = new DateTime(2025, 07, 27)
+			           }
+		           );
+
+			base.OnModelCreating(modelBuilder);
+
+
+		}
+
+		partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }

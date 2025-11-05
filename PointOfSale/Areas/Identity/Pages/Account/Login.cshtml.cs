@@ -75,7 +75,7 @@ namespace PointOfSale.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostAsync(string? returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
-
+           
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         
             if (ModelState.IsValid)
@@ -100,6 +100,8 @@ namespace PointOfSale.Areas.Identity.Pages.Account
                 else
                 {
                     ModelState.AddModelError(string.Empty, "Invalid username or passwword.");
+                    Input.Email = string.Empty;
+                    Input.Password = string.Empty;
                     return Page();
                 }
             }

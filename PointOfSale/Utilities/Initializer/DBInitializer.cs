@@ -48,8 +48,7 @@ namespace PointOfSale.Utilities.Initializer
                  UserName = "xmontemorjerald@gmail.com",
                  Email = "xmontemorjerald@gmail.com",
                  Name = "Montemor, Jerald R.",
-                //PhoneNumber = "09488749263",
-                //Address = "Malabon City",
+                 EmailConfirmed= true
 
             }, "Admin123*").GetAwaiter().GetResult();
 

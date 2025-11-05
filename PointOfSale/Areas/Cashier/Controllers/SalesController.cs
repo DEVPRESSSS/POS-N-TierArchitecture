@@ -2,7 +2,11 @@
 using DinkToPdf;
 using DinkToPdf.Contracts;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewEngines;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using PointOfSale.Business.Contracts;
 using PointOfSale.Model;
 using PointOfSale.Models;
@@ -21,14 +25,19 @@ namespace PointOfSale.Areas.Cashier.Controllers
         private readonly ISaleService _saleService;
         private readonly IMapper _mapper;
         private readonly IConverter _converter;
+        private readonly ICompositeViewEngine _viewEngine;
+        private readonly UserManager<ApplicationUser> _userManager;
 
         public SalesController(ITypeDocumentSaleService typeDocumentSaleService,
-            ISaleService saleService, IMapper mapper, IConverter converter)
+            ISaleService saleService, IMapper mapper, IConverter converter, ICompositeViewEngine viewEngine, UserManager<ApplicationUser> userManager)
         {
             _typeDocumentSaleService = typeDocumentSaleService;
             _saleService = saleService;
             _mapper = mapper;
             _converter = converter;
+            _viewEngine = viewEngine;
+            _userManager = userManager;
+            _userManager = userManager;
         }
         public IActionResult NewSale()
         {
@@ -40,7 +49,44 @@ namespace PointOfSale.Areas.Cashier.Controllers
             return View();
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetCurrentUser()
+        {
+            GenericResponse<object> gResponse = new GenericResponse<object>();
+            try
+            {
+                // Get the current user using UserManager
+                var currentUser = await _userManager.GetUserAsync(HttpContext.User);
 
+                if (currentUser == null)
+                {
+                    gResponse.State = false;
+                    gResponse.Message = "User not found";
+                    return StatusCode(StatusCodes.Status200OK, gResponse);
+                }
+
+                // Return only the necessary user information
+                var userInfo = new
+                {
+                    Id = currentUser.Id,
+                    Name = currentUser.Name,
+                    Email = currentUser.Email,
+                    UserName = currentUser.UserName,
+                    ProfilePath = currentUser.ProfilePath
+                };
+
+                gResponse.State = true;
+                gResponse.Object = userInfo;
+                gResponse.Message = "User retrieved successfully";
+            }
+            catch (Exception ex)
+            {
+                gResponse.State = false;
+                gResponse.Message = ex.Message;
+            }
+
+            return StatusCode(StatusCodes.Status200OK, gResponse);
+        }
 
         [HttpGet]
         public async Task<IActionResult> ListTypeDocumentSale()
@@ -77,6 +123,9 @@ namespace PointOfSale.Areas.Cashier.Controllers
 
                 gResponse.State = true;
                 gResponse.Object = model;
+
+
+               
             }
             catch (Exception ex)
             {
@@ -96,8 +145,26 @@ namespace PointOfSale.Areas.Cashier.Controllers
             return StatusCode(StatusCodes.Status200OK, vmHistorySale);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetSales(string saleNumber)
+        {
+
+            var vmHistorySale = _mapper.Map<List<VMSale>>(await _saleService.Detail(saleNumber));
+            return StatusCode(StatusCodes.Status200OK, vmHistorySale);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetSalesReceipt(string saleNumber)
+        {
+
+            var vmHistorySale = _mapper.Map<VMSale>(await _saleService.Detail(saleNumber));
+            return StatusCode(StatusCodes.Status200OK, vmHistorySale);
+        }
+
         public IActionResult ShowPDFSale(string saleNumber)
         {
+
+
             string urlTemplateView = $"{Request.Scheme}://{Request.Host}/Template/PDFSale?saleNumber={saleNumber}";
 
             var pdf = new HtmlToPdfDocument()
@@ -117,5 +184,10 @@ namespace PointOfSale.Areas.Cashier.Controllers
             return File(archivoPDF, "application/pdf");
         }
 
+     
+
+     
+
+      
     }
 }

@@ -12,17 +12,32 @@ namespace PointOfSale.Utilities.EmailSender
         {
             SendGridSecret = _config.GetValue<string>("SendGrid:SecretKey");
         }
-        public Task SendEmailAsync(string email, string subject, string htmlMessage)
-        {
+		public async Task SendEmailAsync(string email, string subject, string htmlMessage)
+		{
+			try
+			{
+				var client = new SendGridClient(SendGridSecret);
+				var from = new EmailAddress("montemorjeraldd@gmail.com", "Password Recovery");
+				var to = new EmailAddress(email);
+				var message = MailHelper.CreateSingleEmail(from, to, subject, "", htmlMessage);
 
-            var client = new SendGridClient(SendGridSecret);
-            var from = new EmailAddress("montemorjeraldd@gmail.com", "Password Recovery");
-            var to = new EmailAddress(email);
-            var message = MailHelper.CreateSingleEmail(from, to, subject, "", htmlMessage);
+				var response = await client.SendEmailAsync(message);
 
+				// Log the response
+				Console.WriteLine($"Email to {email}: Status {response.StatusCode}");
 
-            return client.SendEmailAsync(message);
-        }
+				if (response.StatusCode != System.Net.HttpStatusCode.Accepted)
+				{
+					var errorBody = await response.Body.ReadAsStringAsync();
+					Console.WriteLine($"SendGrid Error: {errorBody}");
+				}
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine($"Failed to send email to {email}: {ex.Message}");
+				throw;
+			}
+		}
 
-    }
+	}
 }

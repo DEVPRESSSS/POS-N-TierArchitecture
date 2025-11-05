@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "Eb9P0q7JoerC3LcBnKiypnv2dFx7pY8TvNRxQxJqgnoBtOYRxHWsYhLT8btSqkTk0Kg2uow9gMBgqGDFZA7Gfw==",
+  "dgSpecHash": "DnemEGDXBqEjVduJq7cW9qHFpTDpgafyZR68rrisf5OMpPFf9uTFpkdTnWkzERMdfTMSBDb+2r4JIsC231zG0w==",
   "success": true,
   "projectFilePath": "D:\\004_PointOfSale_AspNetCore\\PointOfSale\\PointOfSale\\PointOfSale.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\xmont\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\xmont\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
     "C:\\Users\\xmont\\.nuget\\packages\\dinktopdf\\1.0.8\\dinktopdf.1.0.8.nupkg.sha512",
+    "C:\\Users\\xmont\\.nuget\\packages\\dotenv.net\\4.0.0\\dotenv.net.4.0.0.nupkg.sha512",
     "C:\\Users\\xmont\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
     "C:\\Users\\xmont\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\xmont\\.nuget\\packages\\humanizer.core.af\\2.14.1\\humanizer.core.af.2.14.1.nupkg.sha512",
@@ -90,7 +91,6 @@
     "C:\\Users\\xmont\\.nuget\\packages\\microsoft.entityframeworkcore.sqlite\\6.0.35\\microsoft.entityframeworkcore.sqlite.6.0.35.nupkg.sha512",
     "C:\\Users\\xmont\\.nuget\\packages\\microsoft.entityframeworkcore.sqlite.core\\6.0.35\\microsoft.entityframeworkcore.sqlite.core.6.0.35.nupkg.sha512",
     "C:\\Users\\xmont\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\6.0.35\\microsoft.entityframeworkcore.sqlserver.6.0.35.nupkg.sha512",
-    "C:\\Users\\xmont\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\6.0.35\\microsoft.entityframeworkcore.tools.6.0.35.nupkg.sha512",
     "C:\\Users\\xmont\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "C:\\Users\\xmont\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\6.0.0\\microsoft.extensions.caching.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\xmont\\.nuget\\packages\\microsoft.extensions.caching.memory\\6.0.2\\microsoft.extensions.caching.memory.6.0.2.nupkg.sha512",

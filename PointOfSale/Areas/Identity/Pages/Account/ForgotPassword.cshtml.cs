@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using PointOfSale.Model;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace PointOfSale.Areas.Identity.Pages.Account
 {
@@ -41,17 +42,24 @@ namespace PointOfSale.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByEmailAsync(Input.Email);
+
                 if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
                 {
-                    return RedirectToPage("./ForgotPasswordConfirmation");
+                    ModelState.Remove("Input.Email");
+                    Input.Email = string.Empty;
+                    ModelState.AddModelError("Input.Email", "Email does not exist or is not confirmed.");
+
+                    return Page();
                 }
 
                 var code = await _userManager.GeneratePasswordResetTokenAsync(user);
                 code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                var email = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(user.Email));
+
                 var callbackUrl = Url.Page(
                     "/Account/ResetPassword",
                     pageHandler: null,
-                    values: new { area = "Identity", code },
+                    values: new { area = "Identity", code, email },
                     protocol: Request.Scheme);
 
                 await _emailSender.SendEmailAsync(
@@ -64,5 +72,6 @@ namespace PointOfSale.Areas.Identity.Pages.Account
 
             return Page();
         }
+
     }
 }

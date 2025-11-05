@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "MefsyIpkVaLXs2erd1CAk8nl7EkQ0AeiGXVQdwJ2wok=",
+  "Hash": "KVkw08bdybxm4EtaE65Ik9eG6LGLi4/TUJbiOZWSqIE=",
   "Source": "PointOfSale",
   "BasePath": "_content/PointOfSale",
   "Mode": "Default",
@@ -2827,6 +2827,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Identity": "D:\\004_PointOfSale_AspNetCore\\PointOfSale\\PointOfSale\\wwwroot\\Logo\\Logo.png",
+      "SourceId": "PointOfSale",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\004_PointOfSale_AspNetCore\\PointOfSale\\PointOfSale\\wwwroot\\",
+      "BasePath": "_content/PointOfSale",
+      "RelativePath": "Logo/Logo.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Logo\\Logo.png"
     },
     {
       "Identity": "D:\\004_PointOfSale_AspNetCore\\PointOfSale\\PointOfSale\\wwwroot\\plugins\\bootstrap\\css\\bootstrap.css",
@@ -15424,6 +15443,44 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\plugins\\toastr\\toastr.min.js"
+    },
+    {
+      "Identity": "D:\\004_PointOfSale_AspNetCore\\PointOfSale\\PointOfSale\\wwwroot\\uploads\\19a7b01a-2ee3-4c2b-afa0-f60d785d95dd.jpg",
+      "SourceId": "PointOfSale",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\004_PointOfSale_AspNetCore\\PointOfSale\\PointOfSale\\wwwroot\\",
+      "BasePath": "_content/PointOfSale",
+      "RelativePath": "uploads/19a7b01a-2ee3-4c2b-afa0-f60d785d95dd.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\19a7b01a-2ee3-4c2b-afa0-f60d785d95dd.jpg"
+    },
+    {
+      "Identity": "D:\\004_PointOfSale_AspNetCore\\PointOfSale\\PointOfSale\\wwwroot\\uploads\\6d9ec01c-1c31-47e8-be09-6a2c406476b8.jpg",
+      "SourceId": "PointOfSale",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\004_PointOfSale_AspNetCore\\PointOfSale\\PointOfSale\\wwwroot\\",
+      "BasePath": "_content/PointOfSale",
+      "RelativePath": "uploads/6d9ec01c-1c31-47e8-be09-6a2c406476b8.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\6d9ec01c-1c31-47e8-be09-6a2c406476b8.jpg"
     }
   ]
 }

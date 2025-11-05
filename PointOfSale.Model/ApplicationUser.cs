@@ -16,6 +16,7 @@ namespace PointOfSale.Model
    
         [Required]
         public string? ProfilePath { get; set; }
+        public DateTime? DateCreated { get; set; }
 
         public virtual ICollection<Sale> Sales { get; set; }
 

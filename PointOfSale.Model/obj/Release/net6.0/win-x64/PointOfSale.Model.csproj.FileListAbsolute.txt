@@ -1,0 +1,13 @@
+D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale.Model\bin\Release\net6.0\win-x64\PointOfSale.Model.deps.json
+D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale.Model\bin\Release\net6.0\win-x64\PointOfSale.Model.dll
+D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale.Model\bin\Release\net6.0\win-x64\PointOfSale.Model.pdb
+D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale.Model\obj\Release\net6.0\win-x64\PointOfSale.Model.csproj.AssemblyReference.cache
+D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale.Model\obj\Release\net6.0\win-x64\PointOfSale.Model.GeneratedMSBuildEditorConfig.editorconfig
+D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale.Model\obj\Release\net6.0\win-x64\PointOfSale.Model.AssemblyInfoInputs.cache
+D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale.Model\obj\Release\net6.0\win-x64\PointOfSale.Model.AssemblyInfo.cs
+D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale.Model\obj\Release\net6.0\win-x64\PointOfSale.Model.csproj.CoreCompileInputs.cache
+D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale.Model\obj\Release\net6.0\win-x64\PointOfSale.Model.sourcelink.json
+D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale.Model\obj\Release\net6.0\win-x64\PointOfSale.Model.dll
+D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale.Model\obj\Release\net6.0\win-x64\refint\PointOfSale.Model.dll
+D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale.Model\obj\Release\net6.0\win-x64\PointOfSale.Model.pdb
+D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale.Model\obj\Release\net6.0\win-x64\ref\PointOfSale.Model.dll

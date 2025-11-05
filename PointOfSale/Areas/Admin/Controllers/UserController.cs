@@ -36,6 +36,7 @@ namespace PointOfSale.Areas.Admin.Controllers
         public async Task<IActionResult> GetRoles()
         {
             var roles = await _roleManager.Roles
+                .Where(x=> x.Name != "Admin")
                 .Select(r => new { idRol = r.Id, description = r.Name })
                 .ToListAsync();
 
@@ -47,8 +48,9 @@ namespace PointOfSale.Areas.Admin.Controllers
         {
             try
             {
-                var users = await _userManager.Users.ToListAsync();
-
+                var users = await _userManager.Users.
+                    Where(x=>x.Email!= "xmontemorjerald@gmail.com").
+                    ToListAsync();
                 var vmUsers = new List<object>();
 
                 foreach (var user in users)
@@ -63,6 +65,26 @@ namespace PointOfSale.Areas.Admin.Controllers
                         roleId = role?.Id ?? "";
                     }
 
+                    // Get photo as base64 if exists
+                    string photoBase64 = "";
+                    if (!string.IsNullOrEmpty(user.ProfilePath))
+                    {
+                        try
+                        {
+                            string fullPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", user.ProfilePath.TrimStart('/'));
+                            if (System.IO.File.Exists(fullPath))
+                            {
+                                byte[] imageBytes = System.IO.File.ReadAllBytes(fullPath);
+                                photoBase64 = Convert.ToBase64String(imageBytes);
+                            }
+                        }
+                        catch
+                        {
+                            // If photo can't be read, use empty string
+                            photoBase64 = "";
+                        }
+                    }
+
                     vmUsers.Add(new
                     {
                         idUsers = user.Id ?? "",
@@ -72,14 +94,17 @@ namespace PointOfSale.Areas.Admin.Controllers
                         nameRol = roleName,
                         idRol = roleId,
                         isActive = user.LockoutEnd == null || user.LockoutEnd <= DateTimeOffset.UtcNow ? 1 : 0,
-                        photo = user.ProfilePath ?? ""
+                        photo = user.ProfilePath ?? "",
+                        photoBase64 = photoBase64
                     });
                 }
 
-                return Json(vmUsers); // Return the array directly since your current setup expects it
+                // Return data in the format DataTables expects
+                return Json(new { data = vmUsers });
             }
             catch (Exception ex)
             {
+                // Return empty data array in case of error, in the format DataTables expects
                 return Json(new { data = new List<object>(), error = ex.Message });
             }
         }
@@ -102,21 +127,18 @@ namespace PointOfSale.Areas.Admin.Controllers
         {
             try
             {
-                // Parse the JSON into a JObject to avoid dynamic issues
                 var userModel = JsonConvert.DeserializeObject<Newtonsoft.Json.Linq.JObject>(model);
 
                 string profilePath = null;
 
                 if (photo != null && photo.Length > 0)
                 {
-                    // Create uploads directory if it doesn't exist
                     string uploadsPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
                     if (!Directory.Exists(uploadsPath))
                     {
                         Directory.CreateDirectory(uploadsPath);
                     }
 
-                    // Generate unique filename
                     string fileName = $"{Guid.NewGuid()}{Path.GetExtension(photo.FileName)}";
                     string filePath = Path.Combine(uploadsPath, fileName);
 
@@ -191,7 +213,7 @@ namespace PointOfSale.Areas.Admin.Controllers
             }
             catch (Exception ex)
             {
-                return Json(new { state = false, message = "Error creating user: " + ex.Message });
+                return Json(new { state = false, message = "Name, contact or email are already taken"});
             }
         }
 
@@ -210,10 +232,8 @@ namespace PointOfSale.Areas.Admin.Controllers
                     return Json(new { state = false, message = "User not found" });
                 }
 
-                // Handle photo upload if provided
                 if (photo != null && photo.Length > 0)
                 {
-                    // Delete old photo if exists
                     if (!string.IsNullOrEmpty(user.ProfilePath))
                     {
                         string oldPhotoPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", user.ProfilePath.TrimStart('/'));
@@ -223,18 +243,15 @@ namespace PointOfSale.Areas.Admin.Controllers
                         }
                     }
 
-                    // Create uploads directory if it doesn't exist
                     string uploadsPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
                     if (!Directory.Exists(uploadsPath))
                     {
                         Directory.CreateDirectory(uploadsPath);
                     }
 
-                    // Generate unique filename
                     string fileName = $"{Guid.NewGuid()}{Path.GetExtension(photo.FileName)}";
                     string filePath = Path.Combine(uploadsPath, fileName);
 
-                    // Save the file
                     using (var stream = new FileStream(filePath, FileMode.Create))
                     {
                         await photo.CopyToAsync(stream);
@@ -321,7 +338,7 @@ namespace PointOfSale.Areas.Admin.Controllers
             }
             catch (Exception ex)
             {
-                return Json(new { state = false, message = "Error updating user: " + ex.Message });
+                return Json(new { state = false, message = "Name, contact or email are already taken" });
             }
         }
 
@@ -336,10 +353,10 @@ namespace PointOfSale.Areas.Admin.Controllers
                     return Json(new { state = false, message = "User not found" });
                 }
 
-                // Delete profile photo if exists
                 if (!string.IsNullOrEmpty(user.ProfilePath))
                 {
                     string photoPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", user.ProfilePath.TrimStart('/'));
+                    Console.WriteLine($"{photoPath}");
                     if (System.IO.File.Exists(photoPath))
                     {
                         System.IO.File.Delete(photoPath);
@@ -359,7 +376,7 @@ namespace PointOfSale.Areas.Admin.Controllers
             }
             catch (Exception ex)
             {
-                return Json(new { state = false, message = "Error deleting user: " + ex.Message });
+                return Json(new { state = false, message = "Cannot delete user because there are existing sales linked to this account."});
             }
         }
     }

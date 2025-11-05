@@ -9,13 +9,13 @@ namespace PointOfSale.Areas.Cashier.Controllers
     [Authorize(Roles =SD.Cashier)]
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        public IActionResult NewSale()
         {
             return View();
         }
-        public IActionResult Dashboard()
-        {
-            return View();
-        }
+        //public IActionResult Dashboard()
+        //{
+        //    return View();
+        //}
     }
 }

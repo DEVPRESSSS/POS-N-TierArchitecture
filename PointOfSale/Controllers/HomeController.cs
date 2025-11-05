@@ -20,11 +20,11 @@ namespace PointOfSale.Controllers
             }
             else if (User.IsInRole(SD.Cashier))
             {
-                return RedirectToAction("Dashboard", "Home", new { area = "Cashier" });
+                return RedirectToAction("NewSale", "Sales", new { area = "Cashier" });
             }
 
 
-            return RedirectToAction("Dashboard", "Home", new { area = "Cashier" });
+            return RedirectToAction("NewSale", "Sales", new { area = "Cashier" });
 
         }
     }

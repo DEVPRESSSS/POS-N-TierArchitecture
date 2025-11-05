@@ -23,15 +23,15 @@
              </div>
              <div class="form-group col-sm-3 search-date">
                   <label for="txtStartDate">Start Date</label>
-                  <input type="text" class="form-control" id="txtStartDate">
+                  <input type="text" class="form-control" id="txtStartDate" readonly>
               </div>
               <div class="form-group col-sm-3 search-date">
                   <label for="txtEndDate">End Date</label>
-                  <input type="text" class="form-control" id="txtEndDate">
+                <input type="text" class="form-control" id="txtEndDate" readonly>
               </div>
               <div class="form-group col-sm-3 search-sale">
                   <label for="txtSaleNumberSearch">Sale Number</label>
-                  <input type="text" class="form-control" id="txtSaleNumberSearch">
+                  <input type="text" class="form-control" id="txtSaleNumberSearch" maxlength="6">
               </div>
              <div class="form-group col-sm-3">
                 <button class="btn btn-success btn-block" type="button" id="btnSearch"><i class="fas fa-search"></i> Search</button>
@@ -117,6 +117,14 @@
                                      <label for="txtTotal">Total</label>
                                      <input type="text" class="form-control form-control-sm" id="txtTotal" disabled>
                                  </div>
+                                 <div class="form-group col-sm-4">
+                                    <label for="txtAmount">Amount Paid</label>
+                                     <input type="text" class="form-control form-control-sm" id="txtAmount" disabled>
+                                 </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtChange">Change</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtChange" disabled>
+                                </div>
                              </div>
                              <div class="row">
                                  <div class="col-sm-12">

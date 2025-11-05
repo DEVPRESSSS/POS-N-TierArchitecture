@@ -14,6 +14,7 @@ E:\WorkSpaceAD\YOUTUBE 2\004_POINT OF SALE\PointOfSale\PointOfSale.Data\obj\Debu
 E:\WorkSpaceAD\YOUTUBE 2\004_POINT OF SALE\PointOfSale\PointOfSale.Data\obj\Debug\net6.0\ref\PointOfSale.Data.dll
 E:\WorkSpaceAD\YOUTUBE 2\004_POINT OF SALE\PointOfSale\PointOfSale.Data\obj\Debug\net6.0\PointOfSale.Data.pdb
 D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale.Data\bin\Debug\net6.0\PointOfSale.Data.deps.json
+D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale.Data\bin\Debug\net6.0\PointOfSale.Data.runtimeconfig.json
 D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale.Data\bin\Debug\net6.0\PointOfSale.Data.dll
 D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale.Data\bin\Debug\net6.0\PointOfSale.Data.pdb
 D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale.Data\bin\Debug\net6.0\PointOfSale.Model.dll
@@ -28,4 +29,5 @@ D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale.Data\obj\Debug\net6.0\Poin
 D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale.Data\obj\Debug\net6.0\PointOfSale.Data.dll
 D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale.Data\obj\Debug\net6.0\refint\PointOfSale.Data.dll
 D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale.Data\obj\Debug\net6.0\PointOfSale.Data.pdb
+D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale.Data\obj\Debug\net6.0\PointOfSale.Data.genruntimeconfig.cache
 D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale.Data\obj\Debug\net6.0\ref\PointOfSale.Data.dll

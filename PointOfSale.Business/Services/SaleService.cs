@@ -1,13 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PointOfSale.Business.Contracts;
+﻿using PointOfSale.Business.Contracts;
 using PointOfSale.Data.Repository;
 using PointOfSale.Model;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Linq;                 
+using Microsoft.EntityFrameworkCore;
+
+
 
 namespace PointOfSale.Business.Services
 {
@@ -61,7 +59,7 @@ namespace PointOfSale.Business.Services
                     v.RegistrationDate.Value.Date <= end_date.Date
                 )
                 .Include(tdv => tdv.IdTypeDocumentSaleNavigation)
-                //.Include(u => u.IdUsersNavigation)
+                 .Include(u => u.User)
                 .Include(dv => dv.DetailSales)
                 .ToList();
             }
@@ -69,7 +67,7 @@ namespace PointOfSale.Business.Services
             {
                 return query.Where(v => v.SaleNumber == SaleNumber)
                 .Include(tdv => tdv.IdTypeDocumentSaleNavigation)
-                //.Include(u => u.IdUsersNavigation)
+                .Include(u => u.User)
                 .Include(dv => dv.DetailSales)
                 .ToList();
             }
@@ -81,7 +79,7 @@ namespace PointOfSale.Business.Services
 
             return query
                .Include(tdv => tdv.IdTypeDocumentSaleNavigation)
-               //.Include(u => u.IdUsersNavigation)
+               .Include(u => u.User)
                .Include(dv => dv.DetailSales)
                .First();
         }

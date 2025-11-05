@@ -123,6 +123,9 @@
                         <tr>
                             <td><p class="text">@Model.CustomerDocument</p></td>
                         </tr>
+                        <tr>
+                            <td><p class="text">Payment Type: @Model.PaymentType</p></td>
+                        </tr>
                     </table>
                 </td>
             </tr>
@@ -153,7 +156,7 @@
                     }
                 }
                 <tr>
-                    <td colspan="2" rowspan="3">
+                    <td colspan="2" rowspan="5">
                     </td>
                     <td  class="td-item">
                         <p class="item-2">Sub Total</p>
@@ -169,6 +172,25 @@
                      <td class="item-3">
                         <p>₱ @Model.TotalTaxes</p>
                     </td>
+                    
+                </tr>
+                <tr>
+                    <td class="td-item">
+                        <p class="item-2">Amount Paid</p>
+                    </td>
+                    <td class="item-3">
+                        <p>₱ @Model.AmountPaid</p>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td class="td-item">
+                        <p class="item-2">Change</p>
+                    </td>
+                    <td class="item-3">
+                        <p>₱ @Model.Change</p>
+                    </td>
+
                 </tr>
                  <tr>
                     <td class="item-3">

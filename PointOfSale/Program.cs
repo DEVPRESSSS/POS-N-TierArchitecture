@@ -13,6 +13,7 @@ using PointOfSale.Utilities.Initializer;
 using PointOfSale.Model;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using PointOfSale.Utilities.EmailSender;
+using System.Runtime.InteropServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -65,8 +66,64 @@ builder.Services.AddScoped<IDBInitializer, DBInitializer>();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 // PDF converter setup
-var context = new CustomAssemblyLoadContext();
-context.LoadUnmanagedLibrary(Path.Combine(Directory.GetCurrentDirectory(), "Utilities/LibraryPDF/libwkhtmltox.dll"));
+//var context = new CustomAssemblyLoadContext();
+//context.LoadUnmanagedLibrary(Path.Combine(Directory.GetCurrentDirectory(), "Utilities/LibraryPDF/libwkhtmltox.dll"));
+try
+{
+    // Detect architecture
+    bool is64Bit = Environment.Is64BitProcess;
+    string architectureFolder = is64Bit ? "64bit" : "32bit";
+
+    // Log architecture info
+    Console.WriteLine($"=== PDF DLL Loading Info ===");
+    Console.WriteLine($"Is 64-bit OS: {Environment.Is64BitOperatingSystem}");
+    Console.WriteLine($"Is 64-bit Process: {Environment.Is64BitProcess}");
+    Console.WriteLine($"Architecture: {RuntimeInformation.ProcessArchitecture}");
+    Console.WriteLine($"Loading from folder: {architectureFolder}");
+
+    // Build path to DLL
+    var wkHtmlPath = Path.Combine(Directory.GetCurrentDirectory(), "Utilities", "LibraryPDF", architectureFolder);
+    var dllPath = Path.Combine(wkHtmlPath, "libwkhtmltox.dll");
+
+    Console.WriteLine($"DLL Path: {dllPath}");
+    Console.WriteLine($"DLL Exists: {File.Exists(dllPath)}");
+
+    if (!File.Exists(dllPath))
+    {
+        throw new FileNotFoundException($"Could not find libwkhtmltox.dll at: {dllPath}");
+    }
+
+    // Load the DLL
+    var context = new CustomAssemblyLoadContext();
+    context.LoadUnmanagedLibrary(dllPath);
+
+    // Initialize COM for multi-threading
+    const uint COINIT_MULTITHREADED = 0x0;
+    CoInitializeEx(IntPtr.Zero, COINIT_MULTITHREADED);
+
+    // Register PDF converter
+    builder.Services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
+
+    Console.WriteLine("PDF DLL loaded successfully!");
+}
+catch (Exception ex)
+{
+    Console.WriteLine($"!!! ERROR loading PDF DLL: {ex.Message}");
+    Console.WriteLine($"Stack trace: {ex.StackTrace}");
+
+    // Register a dummy converter so app can still run
+    builder.Services.AddSingleton(typeof(IConverter), provider =>
+    {
+        throw new InvalidOperationException("PDF generation is not available. DLL failed to load.");
+    });
+}
+
+///
+[DllImport("ole32.dll")]
+static extern int CoInitializeEx(IntPtr pvReserved, uint dwCoInit);
+
+//const uint COINIT_MULTITHREADED = 0x0;
+//CoInitializeEx(IntPtr.Zero, COINIT_MULTITHREADED);
 builder.Services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
 builder.Services.AddRazorPages(); 
 
