@@ -7,16 +7,18 @@ namespace PointOfSale.Utilities.EmailSender
     public class EmailSender : IEmailSender
     {
         public string SendGridSecret { get; set; }
+		private readonly string _sendGridSecret;
 
         public EmailSender(IConfiguration _config)
         {
-            SendGridSecret = _config.GetValue<string>("SendGrid:SecretKey");
+
+			_sendGridSecret = Environment.GetEnvironmentVariable("SENDGRID_API_KEY") ?? string.Empty;
         }
 		public async Task SendEmailAsync(string email, string subject, string htmlMessage)
 		{
 			try
 			{
-				var client = new SendGridClient(SendGridSecret);
+				var client = new SendGridClient(_sendGridSecret);
 				var from = new EmailAddress("montemorjeraldd@gmail.com", "Password Recovery");
 				var to = new EmailAddress(email);
 				var message = MailHelper.CreateSingleEmail(from, to, subject, "", htmlMessage);

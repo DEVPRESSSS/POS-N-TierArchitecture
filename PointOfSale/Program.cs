@@ -14,6 +14,7 @@ using PointOfSale.Model;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using PointOfSale.Utilities.EmailSender;
 using System.Runtime.InteropServices;
+using DotNetEnv;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -115,7 +116,12 @@ static extern int CoInitializeEx(IntPtr pvReserved, uint dwCoInit);
 
 //CoInitializeEx(IntPtr.Zero, COINIT_MULTITHREADED);
 builder.Services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
-builder.Services.AddRazorPages(); 
+builder.Services.AddRazorPages();
+
+
+//DotnetEnv
+Env.Load();
+var loadApiKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
 
 var app = builder.Build();
 
@@ -156,6 +162,8 @@ app.MapControllerRoute(
 
 
 SeedDatabase();
+
+
 app.Run();
 
 void SeedDatabase()

@@ -13,6 +13,7 @@ D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale\bin\Debug\net6.0\AutoMappe
 D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale\bin\Debug\net6.0\DinkToPdf.dll
 D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale\bin\Debug\net6.0\dotenv.net.dll
+D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale\bin\Debug\net6.0\DotNetEnv.dll
 D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale\bin\Debug\net6.0\Humanizer.dll
 D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale\bin\Debug\net6.0\MessagePack.dll
 D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale\bin\Debug\net6.0\MessagePack.Annotations.dll
@@ -75,6 +76,7 @@ D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale\bin\Debug\net6.0\NuGet.Pro
 D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale\bin\Debug\net6.0\NuGet.Protocol.dll
 D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale\bin\Debug\net6.0\NuGet.Versioning.dll
 D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale\bin\Debug\net6.0\SendGrid.dll
+D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale\bin\Debug\net6.0\Sprache.dll
 D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale\bin\Debug\net6.0\SQLitePCLRaw.batteries_v2.dll
 D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale\bin\Debug\net6.0\SQLitePCLRaw.core.dll
 D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale\bin\Debug\net6.0\SQLitePCLRaw.provider.e_sqlite3.dll
