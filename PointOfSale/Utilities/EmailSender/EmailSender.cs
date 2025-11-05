@@ -23,13 +23,9 @@ namespace PointOfSale.Utilities.EmailSender
 
 				var response = await client.SendEmailAsync(message);
 
-				// Log the response
-				Console.WriteLine($"Email to {email}: Status {response.StatusCode}");
-
 				if (response.StatusCode != System.Net.HttpStatusCode.Accepted)
 				{
 					var errorBody = await response.Body.ReadAsStringAsync();
-					Console.WriteLine($"SendGrid Error: {errorBody}");
 				}
 			}
 			catch (Exception ex)

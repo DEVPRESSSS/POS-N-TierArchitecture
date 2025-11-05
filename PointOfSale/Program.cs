@@ -23,16 +23,11 @@ builder.Services.AddDbContext<POINTOFSALEContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("SQL"));
 });
-//builder.Services.Configure<SecurityStampValidatorOptions>(options =>
-//{
-//    options.ValidationInterval = TimeSpan.FromSeconds(30);
-//});
+
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
 
-    //options.SignIn.RequireConfirmedEmail = true;
-    // Lockout settings
     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
     options.Lockout.MaxFailedAccessAttempts = 5;
     options.Lockout.AllowedForNewUsers = true;
@@ -55,8 +50,6 @@ builder.Services.AddTransient(typeof(IGenericRepository<>), typeof(GenericReposi
 builder.Services.AddScoped<ISaleRepository, SaleRepository>();
 
 // Service registrations
-//builder.Services.AddScoped<IUserService, UserService>();
-//builder.Services.AddScoped<IRolService, RolService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ITypeDocumentSaleService, TypeDocumentSaleService>();
@@ -66,8 +59,6 @@ builder.Services.AddScoped<IDBInitializer, DBInitializer>();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 // PDF converter setup
-//var context = new CustomAssemblyLoadContext();
-//context.LoadUnmanagedLibrary(Path.Combine(Directory.GetCurrentDirectory(), "Utilities/LibraryPDF/libwkhtmltox.dll"));
 try
 {
     // Detect architecture
@@ -122,7 +113,6 @@ catch (Exception ex)
 [DllImport("ole32.dll")]
 static extern int CoInitializeEx(IntPtr pvReserved, uint dwCoInit);
 
-//const uint COINIT_MULTITHREADED = 0x0;
 //CoInitializeEx(IntPtr.Zero, COINIT_MULTITHREADED);
 builder.Services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
 builder.Services.AddRazorPages(); 
@@ -145,8 +135,6 @@ app.UseAuthorization();
 app.MapRazorPages();
 
 // Configure routing with proper order and fallbacks
-
-
 app.MapControllerRoute(
     name: "areas",
     pattern: "{area:exists}/{controller=Admin}/{action=Dashboard}/{id?}");
