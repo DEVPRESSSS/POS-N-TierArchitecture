@@ -237,6 +237,7 @@ $(document).on("click", "button.btn-delete", function () {
     ProductsForSale = ProductsForSale.filter(p => p.idProduct != _idproduct)
 
     showProducts_Prices()
+    $("#txtAmountPaid").val("")
 })
 
 $("#btnFinalizeSale").click(function () {
