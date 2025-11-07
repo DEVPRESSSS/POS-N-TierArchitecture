@@ -270,6 +270,7 @@ namespace PointOfSale.Data.DBContext
                     .HasColumnName("price");
 
                 entity.Property(e => e.Quantity).HasColumnName("quantity");
+                entity.Property(e => e.AllStock).HasColumnName("allstock");
 
                 entity.Property(e => e.RegistrationDate)
                     .HasColumnType("datetime")
