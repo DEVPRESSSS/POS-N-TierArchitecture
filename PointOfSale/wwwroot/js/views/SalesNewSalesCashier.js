@@ -209,7 +209,7 @@ $('#cboSearchProduct').on('select2:select', function (e) {
     setTimeout(() => {
         const swalInput = document.querySelector('.sweet-alert input[type="text"]');
         if (swalInput) {
-            swalInput.setAttribute('maxlength', '3'); 
+            swalInput.setAttribute('maxlength', '2'); 
 
             swalInput.addEventListener('input', function (e) {
                 this.value = this.value.replace(/[^0-9]/g, '');
