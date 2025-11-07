@@ -9,7 +9,8 @@
         public int? IdCategory { get; set; }
         public string? NameCategory { get; set; }
         public int? Quantity { get; set; }
-        public string? Price { get; set; }
+        public int? AllStock { get; set; }
+        public decimal? Price { get; set; }
         public byte[]? Photo { get; set; }
         public string? PhotoBase64 { get; set; }
         public int? IsActive { get; set; }

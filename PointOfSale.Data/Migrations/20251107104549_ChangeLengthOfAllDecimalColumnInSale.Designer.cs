@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PointOfSale.Data.DBContext;
 
@@ -11,9 +12,10 @@ using PointOfSale.Data.DBContext;
 namespace PointOfSale.Data.Migrations
 {
     [DbContext(typeof(POINTOFSALEContext))]
-    partial class POINTOFSALEContextModelSnapshot : ModelSnapshot
+    [Migration("20251107104549_ChangeLengthOfAllDecimalColumnInSale")]
+    partial class ChangeLengthOfAllDecimalColumnInSale
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

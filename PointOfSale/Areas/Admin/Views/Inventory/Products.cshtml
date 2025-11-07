@@ -40,10 +40,12 @@
 									<th>Brand</th>
 									<th>Description</th>
 									<th>Category</th>
-									<th>Quantity</th>
+									<th>CurrentStock</th>
+									<th>OverallStock</th>
 									<th>Price</th>
 									<th>State</th>
-									<th></th>
+									<th>Stock In</th>
+									<th>Action</th>
 								</tr>
 							</thead>
 							<tbody></tbody>
@@ -93,7 +95,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group col-sm-6">
-                                        <label for="txtQuantity">Quantity</label>
+                                        <label for="txtQuantity">CurrentStock(*qty)</label>
 									<input type="text" class="form-control form-control-sm input-validate" id="txtQuantity" name="Quantity" maxlength="3">
                                     </div>
                             </div>
@@ -129,6 +131,48 @@
 			<div class="modal-footer">
 				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 				<button type="button" class="btn btn-primary" id="btnSave">Save Changes</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- Grid Modal -->
+<div class="modal fade" id="modalStockIn" tabindex="-1" role="dialog" aria-labelledby="exampleModalGrid" aria-hidden="true">
+	<div class="modal-dialog modal-sm" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalGridTitle">Product detail</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form>
+					<input type="hidden" value="0" id="txtId">
+					<input type="hidden" id="textAllstock">
+					<div class="row">
+						<div class="col-sm-12">
+							
+							<div class="form-row">
+								
+								<div class="form-group col-sm-6">
+									<label for="txtStockIn">StockIn</label>
+									<input type="text" class="form-control form-control-sm input-validate" id="txtStockIn" name="StockIn" maxlength="3">
+								</div>
+							</div>
+							
+						</div>
+						
+					</div>
+
+				</form>
+
+			</div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary" id="btnSaveStockin">Save</button>
 			</div>
 		</div>
 	</div>

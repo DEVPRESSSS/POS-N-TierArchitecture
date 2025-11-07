@@ -45,7 +45,11 @@ namespace PointOfSale.Utilities.Automapper
             .ForMember(destiny =>
                 destiny.PhotoBase64,
                 opt => opt.MapFrom(source => Convert.ToBase64String(source.Photo))
-            );
+            )
+            .ForMember(destiny =>
+                destiny.AllStock,
+                opt => opt.MapFrom(source => source.AllStock)
+                );
 
             CreateMap<VMProduct, Product>()
             .ForMember(destiny =>
@@ -59,7 +63,12 @@ namespace PointOfSale.Utilities.Automapper
             .ForMember(destiono =>
                 destiono.Price,
                 opt => opt.MapFrom(source => Convert.ToDecimal(source.Price, new CultureInfo("es-PE")))
+            )
+            .ForMember(destiny =>
+                destiny.AllStock,
+                opt => opt.MapFrom(source => source.AllStock)
             );
+
             #endregion
 
             #region TypeDocumentSale
@@ -72,11 +81,7 @@ namespace PointOfSale.Utilities.Automapper
                     destiny.TypeDocumentSale,
                     opt => opt.MapFrom(source => source.IdTypeDocumentSaleNavigation.Description)
                 )
-				//.ForMember(destiny =>
-				//    destiny.Users
-				////opt => opt.MapFrom(source => source.IdUsersNavigation.Name)
-				//)
-                //NEW
+				
 	             .ForMember(dest => dest.Users, opt => opt.MapFrom(src => src.User.Name))
 	                .ForMember(dest => dest.TypeDocumentSale, opt => opt.MapFrom(src => src.IdTypeDocumentSaleNavigation.Description))
 
@@ -93,7 +98,6 @@ namespace PointOfSale.Utilities.Automapper
                     opt => opt.MapFrom(source => Convert.ToString(source.Total.Value, new CultureInfo("es-PE")))
 
 
-                //New
                 ).ForMember(destiny =>
                     destiny.AmountPaid,
                     opt => opt.MapFrom(source => Convert.ToString(source.AmountPaid.Value, new CultureInfo("es-PE")))
@@ -105,7 +109,6 @@ namespace PointOfSale.Utilities.Automapper
                     destiny.PaymentType,
                     opt => opt.MapFrom(source => source.PaymentType)
 
-                //
 
                 ).ForMember(destiny =>
                     destiny.RegistrationDate,

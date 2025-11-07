@@ -349,14 +349,14 @@ namespace PointOfSale.Data.DBContext
                     .IsUnicode(false)
                     .HasColumnName("saleNumber");
 
-                entity.Property(e => e.Subtotal).HasColumnType("decimal(10, 2)");
+                entity.Property(e => e.Subtotal).HasColumnType("decimal(18, 2)");
 
                 entity.Property(e => e.Total)
-                    .HasColumnType("decimal(10, 2)")
+                    .HasColumnType("decimal(18, 2)")
                     .HasColumnName("total");
 
                 entity.Property(e => e.TotalTaxes)
-                    .HasColumnType("decimal(10, 2)")
+                    .HasColumnType("decimal(18, 2)")
                     .HasColumnName("totalTaxes");
 
                 entity.HasOne(d => d.IdTypeDocumentSaleNavigation)

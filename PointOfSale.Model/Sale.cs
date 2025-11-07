@@ -28,9 +28,9 @@ namespace PointOfSale.Model
         public decimal? Total { get; set; }
         public DateTime? RegistrationDate { get; set; }
         public string? PaymentType { get; set; }
-        [Column(TypeName = "decimal(10,2)")]
+        [Column(TypeName = "decimal(18,2)")]
         public decimal? AmountPaid { get; set; }
-        [Column(TypeName = "decimal(10,2)")]
+        [Column(TypeName = "decimal(18,2)")]
         public decimal? ChangeAmount { get; set; }
         public virtual TypeDocumentSale? IdTypeDocumentSaleNavigation { get; set; }
        // public virtual User? IdUsersNavigation { get; set; }
