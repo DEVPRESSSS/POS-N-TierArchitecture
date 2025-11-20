@@ -89,6 +89,10 @@
       "PackagePath": "staticwebassets\\js\\views\\InventoryProducts.js"
     },
     {
+      "Id": "D:\\004_PointOfSale_AspNetCore\\PointOfSale\\PointOfSale\\wwwroot\\js\\views\\InventoryReport.js",
+      "PackagePath": "staticwebassets\\js\\views\\InventoryReport.js"
+    },
+    {
       "Id": "D:\\004_PointOfSale_AspNetCore\\PointOfSale\\PointOfSale\\wwwroot\\js\\views\\ReportsSalesReport.js",
       "PackagePath": "staticwebassets\\js\\views\\ReportsSalesReport.js"
     },

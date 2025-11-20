@@ -181,7 +181,7 @@ $('#cboSearchProduct').on('select2:select', function (e) {
     setTimeout(() => {
         const swalInput = document.querySelector('.sweet-alert input[type="text"]');
         if (swalInput) {
-            swalInput.setAttribute('maxlength', '3'); 
+            swalInput.setAttribute('maxlength', '2'); 
 
             swalInput.addEventListener('input', function (e) {
                 this.value = this.value.replace(/[^0-9]/g, '');
@@ -237,6 +237,7 @@ $(document).on("click", "button.btn-delete", function () {
     ProductsForSale = ProductsForSale.filter(p => p.idProduct != _idproduct)
 
     showProducts_Prices()
+    $("#txtAmountPaid").val("")
 })
 
 $("#btnFinalizeSale").click(function () {
@@ -400,20 +401,16 @@ $("#btnFinalizeSale").click(function () {
 })
 
 $(document).ready(function () {
-    // Prevent consecutive spaces while typing
     $('#txtNameClient').on('input', function () {
         let value = $(this).val();
 
-        // Remove consecutive spaces
         value = value.replace(/\s{2,}/g, ' ');
 
-        // Remove leading spaces
         value = value.replace(/^\s+/, '');
 
         $(this).val(value);
     });
 
-    // Prevent pasting consecutive spaces or leading spaces
     $('#txtNameClient').on('paste', function (e) {
         setTimeout(() => {
             let value = $(this).val();
@@ -422,14 +419,11 @@ $(document).ready(function () {
         }, 0);
     });
 
-    // Prevent space key at beginning or after another space
     $('#txtNameClient').on('keypress', function (e) {
         const currentValue = $(this).val();
         const cursorPosition = this.selectionStart;
 
-        // If space key is pressed
         if (e.which === 32) {
-            // Prevent space if at the start or if previous character is space
             if (cursorPosition === 0 || currentValue[cursorPosition - 1] === ' ') {
                 e.preventDefault();
                 return false;

@@ -305,3 +305,5 @@ D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale\obj\Release\net6.0\PointOf
 D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale\obj\Release\net6.0\ref\PointOfSale.dll
 D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale\bin\Release\net6.0\Utilities\LibraryPDF\64bit\libwkhtmltox.dll
 D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale\bin\Release\net6.0\Utilities\LibraryPDF\32bit\libwkhtmltox.dll
+D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale\bin\Release\net6.0\DotNetEnv.dll
+D:\004_PointOfSale_AspNetCore\PointOfSale\PointOfSale\bin\Release\net6.0\Sprache.dll

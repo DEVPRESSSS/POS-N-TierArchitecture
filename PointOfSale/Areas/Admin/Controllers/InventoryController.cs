@@ -35,7 +35,9 @@ namespace PointOfSale.Areas.Admin.Controllers
             return View();
         }
 
-        [HttpGet]
+		
+
+		[HttpGet]
         public async Task<IActionResult> GetCategories()
         {
 
@@ -203,5 +205,11 @@ namespace PointOfSale.Areas.Admin.Controllers
             return StatusCode(StatusCodes.Status200OK, gResponse);
         }
 
-    }
+		
+
+
+
+
+
+	}
 }

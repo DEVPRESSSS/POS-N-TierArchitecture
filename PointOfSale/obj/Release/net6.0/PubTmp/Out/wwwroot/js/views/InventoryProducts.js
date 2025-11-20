@@ -1,6 +1,5 @@
 ﻿let tableData;
 let rowSelected;
-
 const BASIC_MODEL = {
     idProduct: 0,
     barCode: "",
@@ -8,6 +7,7 @@ const BASIC_MODEL = {
     description: "",
     idCategory: 0,
     quantity: 0,
+    allStock:0,
     price: 0,
     isActive: 1,
     photo: ""
@@ -74,6 +74,7 @@ $(document).ready(function () {
             { "data": "description" },
             { "data": "nameCategory" },
             { "data": "quantity" },
+            { "data": "allStock" },
             { "data": "price" },
             {
                 "data": "isActive",
@@ -83,6 +84,13 @@ $(document).ready(function () {
                     else
                         return '<span class="badge badge-danger">Inactive</span>';
                 }
+            },
+            {
+                "defaultContent": 
+                    '<button class="btn btn-success btn-stockin btn-sm mr-2"><i class="mdi mdi-pencil"></i></button>' ,
+                "orderable": false,
+                "searchable": false,
+                "width": "80px"
             },
             {
                 "defaultContent": '<button class="btn btn-primary btn-edit btn-sm mr-2"><i class="mdi mdi-pencil"></i></button>' +
@@ -132,15 +140,40 @@ const openModal = (model = BASIC_MODEL) => {
         $("#imgProduct").attr("src", "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtc2l6ZT0iMTgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5ObyBJbWFnZTwvdGV4dD48L3N2Zz4=");
     }
 
+    if (model.idProduct !== null && model.idProduct !== 0) {
+        $("#txtQuantity").closest(".form-group, .col, div").hide(); 
+    } else {
+        $("#txtQuantity").closest(".form-group, .col, div").show(); 
+    }
+
     $("#modalData").modal("show");
 }
+
+//Modal for stockin
+const openModalStockIn = (model = BASIC_MODEL) => {
+    $("#txtId").val(model.idProduct);
+    $("#txtQuantity").val(model.quantity);
+    $("#txtBarCode").val(model.barCode);       
+    $("#txtBrand").val(model.brand);
+    $("#txtDescription").val(model.description);
+    $("#cboCategory").val(model.idCategory);
+    $("#txtPrice").val(model.price);
+    $("#cboState").val(model.isActive ? 1 : 0);
+    $("#textAllstock").val(model.allstock);
+    console.log($("#textAllstock").val(model.allStock));
+    $("#txtStockIn").val(""); 
+    $("#modalStockIn").modal("show");
+}
+
+
+
 
 $("#btnNewProduct").on("click", function () {
     openModal();
 });
 
 $("#btnSave").on("click", function () {
-    const inputs = $("input.input-validate").serializeArray();
+    const inputs = $("#modalData").find("input.input-validate").serializeArray();
     const inputs_without_value = inputs.filter((item) => item.value.trim() == "");
 
     if (inputs_without_value.length > 0) {
@@ -186,8 +219,7 @@ $("#btnSave").on("click", function () {
     model["quantity"] = $("#txtQuantity").val();
     model["price"] = $("#txtPrice").val();
     model["isActive"] = $("#cboState").val();
-
-   
+    model["allstock"] = $("#txtQuantity").val();
 
     const inputPhoto = document.getElementById('txtPhoto');
     const formData = new FormData();
@@ -242,6 +274,91 @@ $("#btnSave").on("click", function () {
         });
 });
 
+
+//Stock in save
+$("#btnSaveStockin").on("click", function () {
+    const inputs = $("#modalStockIn").find("input.input-validate").serializeArray();
+    const inputs_without_value = inputs.filter((item) => item.value.trim() == "");
+
+    if (inputs_without_value.length > 0) {
+        const msg = `You must complete the field : "${inputs_without_value[0].name}"`;
+        if (typeof toastr !== 'undefined') {
+            toastr.warning(msg, "");
+        } else {
+            alert(msg);
+        }
+        $(`input[name="${inputs_without_value[0].name}"]`).focus();
+        return;
+    }
+    const currentQty = parseInt($("#txtQuantity").val()) || 0;
+    const allStock = parseInt($("#textAllstock").val());
+    const stockInQty = parseInt($("#txtStockIn").val()) || 0;
+    if (stockInQty <= 0) {
+        const msg = "Stock must be greater than zero";
+        if (typeof toastr !== 'undefined') toastr.warning(msg, "");
+        else alert(msg);
+        $("#txtStockIn").focus();
+        return;
+    }
+   
+    const model = structuredClone(BASIC_MODEL);
+    model["idProduct"] = parseInt($("#txtId").val());
+    model["barCode"] = $("#txtBarCode").val();
+    model["brand"] = $("#txtBrand").val();
+    model["description"] = $("#txtDescription").val();
+    model["idCategory"] = $("#cboCategory").val();
+    model["quantity"] = currentQty + stockInQty;
+    model["price"] = $("#txtPrice").val();
+    model["isActive"] = $("#cboState").val();
+    model["allStock"] = allStock + stockInQty;
+
+    const inputPhoto = document.getElementById('txtPhoto');
+    const formData = new FormData();
+
+    if (inputPhoto.files[0]) {
+        formData.append('photo', inputPhoto.files[0]);
+    }
+    formData.append('model', JSON.stringify(model));
+
+    // Show loading overlay if available
+    if (typeof $.fn.LoadingOverlay !== 'undefined') {
+        $("#modalStockIn").find("div.modal-content").LoadingOverlay("show");
+    }
+
+
+    fetch("/Admin/Inventory/EditProduct", {
+        method: "PUT",
+        body: formData
+    })
+        .then(response => {
+            if (typeof $.fn.LoadingOverlay !== 'undefined') {
+                $("#modalStockIn").find("div.modal-content").LoadingOverlay("hide");
+            }
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(responseJson => {
+            if (responseJson.state) {
+                
+                tableData.row(rowSelected).data(responseJson.object).draw(false);
+                rowSelected = null;
+                showSuccess("Add stock successfully");
+
+                $("#modalStockIn").modal("hide");
+            } else {
+                showError(responseJson.message || "An error occurred");
+            }
+        })
+        .catch((error) => {
+            if (typeof $.fn.LoadingOverlay !== 'undefined') {
+                $("#modalStockIn").find("div.modal-content").LoadingOverlay("hide");
+            }
+            console.error('Error:', error);
+            showError("Server error. Please check if the endpoint exists and is working.");
+        });
+});
 function showSuccess(message) {
     if (typeof swal !== 'undefined') {
         swal("Successful!", message, "success");
@@ -265,7 +382,7 @@ function showError(message) {
     }
 }
 
-
+//Edit product
 $("#tbData tbody").on("click", ".btn-edit", function () {
     if ($(this).closest('tr').hasClass('child')) {
         rowSelected = $(this).closest('tr').prev();
@@ -277,6 +394,23 @@ $("#tbData tbody").on("click", ".btn-edit", function () {
     openModal(data);
 });
 
+//Stock in product
+$("#tbData tbody").on("click", ".btn-stockin", function () {
+
+    if ($(this).closest('tr').hasClass('child')) {
+        rowSelected = $(this).closest('tr').prev();
+    } else {
+        rowSelected = $(this).closest('tr');
+    }
+
+    const data = tableData.row(rowSelected).data();
+    console.log(data)
+
+    openModalStockIn(data);
+
+});
+
+//Delete product
 $("#tbData tbody").on("click", ".btn-delete", function () {
     let row;
 
@@ -452,5 +586,14 @@ $(document).ready(function () {
             };
             reader.readAsDataURL(file);
         }
+    });
+
+    $('#txtStockIn').on('input', function () {
+        let value = $(this).val();
+        value = value.replace(/[^0-9]/g, '');
+        if (value.length > 1 && value[0] === '0') {
+            value = value.substring(1);
+        }
+        $(this).val(value);
     });
 });
