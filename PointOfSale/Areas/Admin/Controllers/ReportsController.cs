@@ -44,30 +44,56 @@ namespace PointOfSale.Areas.Admin.Controllers
             reportDate ??= DateTime.Now;
 
             var products = await _productService.List();
-
-            // Format the endDate correctly for your service
+            string startDate = "01/01/2000";
             string endDate = reportDate.Value.ToString("dd/MM/yyyy");
-            string startDate = "01/01/2000"; // safe default start date
 
             var detailSales = await _saleService.Report(startDate, endDate);
 
-            var inventoryReport = products.Select(p =>
+            var report = new List<VMInventoryTransaction>();
+
+            foreach (var p in products)
             {
-                var quantitySold = detailSales
+                int remainingStock = p.AllStock ?? 0;
+
+                // Find all transactions for this product
+                var transactions = detailSales
                     .Where(d => d.IdProduct == p.IdProduct)
-                    .Sum(d => d.Quantity ?? 0);
+                    .OrderBy(d => d.IdSaleNavigation.RegistrationDate);
 
-                return new VMInventoryReport
+                foreach (var t in transactions)
                 {
-                    ProductName = p.Description ?? p.Brand ?? "Unknown",
-                    InitialStock = p.AllStock ?? 0,
-                    QuantitySold = quantitySold,
-                    RemainingStock = (p.AllStock ?? 0) - quantitySold
-                };
-            }).ToList();
+                    int quantitySold = t.Quantity ?? 0;
+                    remainingStock -= quantitySold;
 
-            return StatusCode(StatusCodes.Status200OK, new { data = inventoryReport });
+                    report.Add(new VMInventoryTransaction
+                    {
+                        ProductName = p.Description ?? p.Brand ?? "Unknown",
+                        SaleNumber = t.IdSaleNavigation?.SaleNumber ?? "-",
+                        SaleDate = t.IdSaleNavigation?.RegistrationDate ?? DateTime.MinValue,
+                        QuantitySold = quantitySold,
+                        InitialStock = p.AllStock ?? 0,
+                        RemainingStock = remainingStock
+                    });
+                }
+
+                // Optional: If product has no sales, still show initial stock
+                if (!transactions.Any())
+                {
+                    report.Add(new VMInventoryTransaction
+                    {
+                        ProductName = p.Description ?? p.Brand ?? "Unknown",
+                        SaleNumber = "-",
+                        SaleDate = DateTime.MinValue,
+                        QuantitySold = 0,
+                        InitialStock = p.AllStock ?? 0,
+                        RemainingStock = p.AllStock ?? 0
+                    });
+                }
+            }
+
+            return StatusCode(StatusCodes.Status200OK, new { data = report });
         }
+
 
 
 

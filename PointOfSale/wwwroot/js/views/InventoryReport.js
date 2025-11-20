@@ -14,19 +14,21 @@
             }
         },
         columns: [
+            { data: null, render: (data, type, row, meta) => meta.row + 1 }, // # row index
+            { data: 'productName' },
+            { data: 'saleNumber' },
             {
-                data: null,
-                render: function (data, type, row, meta) {
-                    return meta.row + 1; // Auto-increment number
+                data: 'saleDate',
+                render: function (data) {
+                    if (!data || data === '0001-01-01T00:00:00') return '-';
+                    return new Date(data).toLocaleDateString();
                 }
             },
-                { data: "productName" },
-                { data: "initialStock" },
-                { data: "quantitySold" },
-                { data: "remainingStock" }
-            
-
+            { data: 'quantitySold' },
+            { data: 'initialStock' },
+            { data: 'remainingStock' }
         ],
+
         dom: 'Bfrtip',
         buttons: [
             'csv', 'excel'
