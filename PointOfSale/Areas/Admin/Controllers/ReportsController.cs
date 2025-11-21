@@ -38,33 +38,106 @@ namespace PointOfSale.Areas.Admin.Controllers
             return StatusCode(StatusCodes.Status200OK, new { data = vmList });
         }
 
+        //[HttpGet]
+        //public async Task<IActionResult> GetInventoryReport(DateTime? reportDate = null)
+        //{
+        //    reportDate ??= DateTime.Now;
+
+        //    var products = await _productService.List();
+        //    string startDate = "01/01/2000";
+        //    string endDate = reportDate.Value.ToString("dd/MM/yyyy");
+
+        //    var detailSales = await _saleService.Report(startDate, endDate);
+
+        //    var report = new List<VMInventoryTransaction>();
+
+        //    foreach (var p in products)
+        //    {
+        //        int remainingStock = p.AllStock ?? 0;
+
+        //        // Find all transactions for this product
+        //        var transactions = detailSales
+        //            .Where(d => d.IdProduct == p.IdProduct)
+        //            .OrderBy(d => d.IdSaleNavigation.RegistrationDate);
+
+        //        foreach (var t in transactions)
+        //        {
+        //            int quantitySold = t.Quantity ?? 0;
+        //            remainingStock -= quantitySold;
+
+        //            report.Add(new VMInventoryTransaction
+        //            {
+        //                ProductName = p.Description ?? p.Brand ?? "Unknown",
+        //                SaleNumber = t.IdSaleNavigation?.SaleNumber ?? "-",
+        //                SaleDate = t.IdSaleNavigation?.RegistrationDate ?? DateTime.MinValue,
+        //                QuantitySold = quantitySold,
+        //                InitialStock = p.AllStock ?? 0,
+        //                RemainingStock = remainingStock
+        //            });
+        //        }
+
+        //        // Optional: If product has no sales, still show initial stock
+        //        if (!transactions.Any())
+        //        {
+        //            report.Add(new VMInventoryTransaction
+        //            {
+        //                ProductName = p.Description ?? p.Brand ?? "Unknown",
+        //                SaleNumber = "-",
+        //                SaleDate = DateTime.MinValue,
+        //                QuantitySold = 0,
+        //                InitialStock = p.AllStock ?? 0,
+        //                RemainingStock = p.AllStock ?? 0
+        //            });
+        //        }
+        //    }
+
+        //    return StatusCode(StatusCodes.Status200OK, new { data = report });
+        //}
+
         [HttpGet]
-        public async Task<IActionResult> GetInventoryReport(DateTime? reportDate = null)
+        public async Task<IActionResult> GetInventoryReport(DateTime? reportDate = null, DateTime? startDate = null, DateTime? endDate = null)
         {
-            reportDate ??= DateTime.Now;
-
             var products = await _productService.List();
-            string startDate = "01/01/2000";
-            string endDate = reportDate.Value.ToString("dd/MM/yyyy");
+            string dbStartDate = "01/01/2000";
+            string dbEndDate = DateTime.Now.AddDays(1).ToString("dd/MM/yyyy");
 
-            var detailSales = await _saleService.Report(startDate, endDate);
-
+            var detailSales = await _saleService.Report(dbStartDate, dbEndDate);
             var report = new List<VMInventoryTransaction>();
+
+            DateTime? filterStartDate = null;
+            DateTime? filterEndDate = null;
+
+            if (startDate.HasValue && endDate.HasValue)
+            {
+                filterStartDate = startDate.Value.Date;
+                filterEndDate = endDate.Value.Date.AddDays(1);
+            }
+            else if (reportDate.HasValue)
+            {
+                filterStartDate = reportDate.Value.Date;
+                filterEndDate = reportDate.Value.Date.AddDays(1);
+            }
 
             foreach (var p in products)
             {
                 int remainingStock = p.AllStock ?? 0;
 
-                // Find all transactions for this product
                 var transactions = detailSales
-                    .Where(d => d.IdProduct == p.IdProduct)
-                    .OrderBy(d => d.IdSaleNavigation.RegistrationDate);
+                    .Where(d => d.IdProduct == p.IdProduct);
+
+                if (filterStartDate.HasValue && filterEndDate.HasValue)
+                {
+                    transactions = transactions.Where(d =>
+                        d.IdSaleNavigation.RegistrationDate >= filterStartDate
+                        && d.IdSaleNavigation.RegistrationDate < filterEndDate);
+                }
+
+                transactions = transactions.OrderBy(d => d.IdSaleNavigation.RegistrationDate);
 
                 foreach (var t in transactions)
                 {
                     int quantitySold = t.Quantity ?? 0;
                     remainingStock -= quantitySold;
-
                     report.Add(new VMInventoryTransaction
                     {
                         ProductName = p.Description ?? p.Brand ?? "Unknown",
@@ -75,26 +148,10 @@ namespace PointOfSale.Areas.Admin.Controllers
                         RemainingStock = remainingStock
                     });
                 }
-
-                // Optional: If product has no sales, still show initial stock
-                if (!transactions.Any())
-                {
-                    report.Add(new VMInventoryTransaction
-                    {
-                        ProductName = p.Description ?? p.Brand ?? "Unknown",
-                        SaleNumber = "-",
-                        SaleDate = DateTime.MinValue,
-                        QuantitySold = 0,
-                        InitialStock = p.AllStock ?? 0,
-                        RemainingStock = p.AllStock ?? 0
-                    });
-                }
             }
 
             return StatusCode(StatusCodes.Status200OK, new { data = report });
         }
-
-
 
 
     }
