@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "LsrChW3N4hmqAWF8UYl/Hg+bq8fg6GruQImGIJR2abE=",
+  "Hash": "NpJJLtfFUoPs1JcmzUshPs2ERLyqoGD1QM0Ubp2Ru8Y=",
   "Source": "PointOfSale",
   "BasePath": "_content/PointOfSale",
   "Mode": "Default",
@@ -1592,6 +1592,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\views\\InventoryProducts.js"
+    },
+    {
+      "Identity": "D:\\004_PointOfSale_AspNetCore\\PointOfSale\\PointOfSale\\wwwroot\\js\\views\\InventoryReport.js",
+      "SourceId": "PointOfSale",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\004_PointOfSale_AspNetCore\\PointOfSale\\PointOfSale\\wwwroot\\",
+      "BasePath": "_content/PointOfSale",
+      "RelativePath": "js/views/InventoryReport.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\views\\InventoryReport.js"
     },
     {
       "Identity": "D:\\004_PointOfSale_AspNetCore\\PointOfSale\\PointOfSale\\wwwroot\\js\\views\\ReportsSalesReport.js",

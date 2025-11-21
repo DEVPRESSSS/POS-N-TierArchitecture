@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parameters>
-  <parameter name="IIS Web Application Name" description="" value="site41589" tags="IisApp">
+  <parameter name="IIS Web Application Name" description="" value="site44010" tags="IisApp">
     <parameterEntry kind="ProviderPath" scope="IisApp" match="^D:\\004_PointOfSale_AspNetCore\\PointOfSale\\PointOfSale\\obj\\Release\\net6\.0\\PubTmp\\Out\\$" />
   </parameter>
 </parameters>
